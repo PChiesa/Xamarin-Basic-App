@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Autofac;
 using Foundation;
+using Prism.Autofac;
 using UIKit;
 
 namespace BasicApp.iOS
@@ -19,9 +20,18 @@ namespace BasicApp.iOS
 //			Xamarin.Calabash.Start();
 //#endif
 
-            LoadApplication(new App());
+            LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
         }
+
     }
+
+    public class iOSInitializer : IPlatformInitializer
+    {
+        public void RegisterTypes(ContainerBuilder container)
+        {
+        }
+    }
+
 }

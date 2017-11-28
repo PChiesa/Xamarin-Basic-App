@@ -10,14 +10,24 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BasicAppPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Login\Views\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)BasicAppPage.xaml.cs">
-      <DependentUpon>BasicAppPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Login\Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Login\ViewModels\LoginViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Login\LoginModule.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Login\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Login\Views\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Login\ViewModels\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Login\Services\" />
   </ItemGroup>
 </Project>
