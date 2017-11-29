@@ -13,6 +13,12 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Login\Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Login\Views\RecoverPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Login\Views\RegisterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -23,11 +29,37 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Login\ViewModels\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Login\LoginModule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Login\Views\RecoverPage.xaml.cs">
+      <DependentUpon>RecoverPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Login\ViewModels\RecoverViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Login\Views\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Login\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Login\Services\ILoginService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Login\Services\LoginService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Login\Services\ILoginApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Login\Models\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\IEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Database\IBaseRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Login\Models\LoginCredentials.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Connectivity\IConnectivityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Connectivity\ConnectivityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Policies\IPolicy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Policies\NoInternetPolicy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Policies\Exceptions\NoInternetException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Login\" />
     <Folder Include="$(MSBuildThisFileDirectory)Login\Views\" />
     <Folder Include="$(MSBuildThisFileDirectory)Login\ViewModels\" />
     <Folder Include="$(MSBuildThisFileDirectory)Login\Services\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Login\Models\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Database\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Policies\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Connectivity\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Policies\Exceptions\" />
   </ItemGroup>
 </Project>

@@ -15,7 +15,7 @@ namespace BasicApp
             NavigationService.NavigateAsync("Login");
         }
 
-        protected override void RegisterTypes()
+        protected override void RegisterTypes()/* See https://dansiegel.net/post/2017/08/02/breaking-changes-for-prism-autofac-users*/
         {
             LoginModule.Initialize(Builder);
         }
