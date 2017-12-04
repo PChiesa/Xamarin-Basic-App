@@ -6,6 +6,11 @@ namespace BasicApp
 {
     public partial class App : PrismApplication
     {
+        public App()
+        {
+            InitializeComponent();
+        }
+
         public App(IPlatformInitializer initializer = null) : base(initializer) { }
 
         protected override void OnInitialized()

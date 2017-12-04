@@ -19,6 +19,12 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Login\Views\RegisterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Voucher\Views\EventListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Voucher\Views\EventVoucherListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -50,6 +56,23 @@
     <Compile Include="$(MSBuildThisFileDirectory)Policies\IPolicy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Policies\NoInternetPolicy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Policies\Exceptions\NoInternetException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\ViewModels\EventListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\VoucherModule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Views\EventListPage.xaml.cs">
+      <DependentUpon>EventListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Views\EventVoucherListPage.xaml.cs">
+      <DependentUpon>EventVoucherListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\ViewModels\EventVoucherListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Services\IVoucherApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Services\IVoucherService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Services\VoucherService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Models\Event.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Models\Voucher.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Session\ISessionManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Session\SessionManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Policies\Exceptions\EmptySessionException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Login\" />
@@ -61,5 +84,12 @@
     <Folder Include="$(MSBuildThisFileDirectory)Policies\" />
     <Folder Include="$(MSBuildThisFileDirectory)Connectivity\" />
     <Folder Include="$(MSBuildThisFileDirectory)Policies\Exceptions\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Voucher\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Voucher\Models\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Voucher\Services\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Voucher\ViewModels\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Voucher\Views\" />
+    <Folder Include="$(MSBuildThisFileDirectory)New Folder\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Session\" />
   </ItemGroup>
 </Project>
