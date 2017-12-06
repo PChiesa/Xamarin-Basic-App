@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BasicApp.Login.ViewModels
 {
-    public class RegisterViewModel : BindableBase
+    public class RegisterViewModel : BaseViewModel
     {
         public RegisterViewModel()
         {

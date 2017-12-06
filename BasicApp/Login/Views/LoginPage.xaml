@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" x:Class="BasicApp.Login.Views.LoginPage">
-    <StackLayout Padding="20">
-        <StackLayout VerticalOptions="StartAndExpand">
-            <StackLayout Margin="0, 0, 0, 10">
-                <Label Text="CPF" />
-                <Entry Text="{Binding Login.Cpf}" />
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" xmlns:localControls="clr-namespace:BasicApp.UI.Controls" xmlns:localBehaviors="clr-namespace:BasicApp.UI.Behaviors" x:Class="BasicApp.Login.Views.LoginPage">
+    <Grid>
+        <StackLayout Padding="20" VerticalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="StartAndExpand">
+                <StackLayout Margin="0, 0, 0, 10">
+                    <Label Text="CPF" />
+                    <Entry Text="{Binding Login.Cpf}">
+                        <Entry.Behaviors>
+                            <localBehaviors:CpfEntryBehavior />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout Margin="0, 0, 0, 10">
+                    <Label Text="E-mail" />
+                    <Entry Text="{Binding Login.Email}">
+                        <Entry.Behaviors>
+                            <localBehaviors:EmailEntryBehavior />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout Margin="0, 0, 0, 10">
+                    <Label Text="Senha" />
+                    <Entry IsPassword="true" Text="{Binding Login.Password}" />
+                </StackLayout>
+                <Button Text="Login" />
             </StackLayout>
-            <StackLayout Margin="0, 0, 0, 10">
-                <Label Text="E-mail" />
-                <Entry Text="{Binding Login.Email}" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Button Text="Esqueci a senha" HorizontalOptions="StartAndExpand" />
+                <Button Text="Criar conta" />
             </StackLayout>
-            <StackLayout Margin="0, 0, 0, 10">
-                <Label Text="Senha" />
-                <Entry IsPassword="true" Text="{Binding Login.Password}" />
-            </StackLayout>
-            <Button Text="Login" />
         </StackLayout>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-            <Button Text="Esqueci a senha" HorizontalOptions="StartAndExpand" />
-            <Button Text="Criar conta" />
-        </StackLayout>
-    </StackLayout>
+        <localControls:LoadingIndicatorView IsVisible="{Binding IsLoading}" IsLoading="{Binding IsLoading}" LoadingMessage="{Binding LoadingMessage}" />
+    </Grid>
 </ContentPage>

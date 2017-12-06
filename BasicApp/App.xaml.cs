@@ -1,7 +1,9 @@
 ﻿using BasicApp.Login;
 using Prism.Autofac;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace BasicApp
 {
     public partial class App : PrismApplication

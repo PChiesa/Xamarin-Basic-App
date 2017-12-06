@@ -25,6 +25,10 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Voucher\Views\EventVoucherListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\Controls\LoadingIndicatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -73,6 +77,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Session\ISessionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Session\SessionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Policies\Exceptions\EmptySessionException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Controls\LoadingIndicatorView.xaml.cs">
+      <DependentUpon>LoadingIndicatorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Behaviors\CpfEntryBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Behaviors\EmailEntryBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Login\" />
@@ -89,7 +99,9 @@
     <Folder Include="$(MSBuildThisFileDirectory)Voucher\Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)Voucher\ViewModels\" />
     <Folder Include="$(MSBuildThisFileDirectory)Voucher\Views\" />
-    <Folder Include="$(MSBuildThisFileDirectory)New Folder\" />
     <Folder Include="$(MSBuildThisFileDirectory)Session\" />
+    <Folder Include="$(MSBuildThisFileDirectory)UI\" />
+    <Folder Include="$(MSBuildThisFileDirectory)UI\Behaviors\" />
+    <Folder Include="$(MSBuildThisFileDirectory)UI\Controls\" />
   </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BasicApp.Login.ViewModels
 {
-    public class RecoverViewModel : BindableBase
+    public class RecoverViewModel : BaseViewModel
     {
         public RecoverViewModel()
         {
