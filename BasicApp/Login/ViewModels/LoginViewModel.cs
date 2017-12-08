@@ -6,42 +6,51 @@ using System.Linq;
 using System.Threading;
 using Prism.Navigation;
 using System.Threading.Tasks;
+using BasicApp.UI.Services;
+using System.Windows.Input;
+using BasicApp.Login.Services;
+using BasicApp.Session;
+using BasicApp.Login.Models;
+using Prism.Services;
 
 namespace BasicApp.Login.ViewModels
 {
-    public class LoginViewModel : BaseViewModel, INavigationAware
+    public class LoginViewModel : BaseViewModel
     {
-        public LoginViewModel()
-        {
-            Title = "Hello";
-        }
+        private readonly ILoginService _loginService;
+        private readonly ISessionManager _sessionManager;
+        private readonly IPageDialogService _pageDialogService;
 
+        public ICommand LoginCommand { get; private set; }
+        public ICommand NavigateToRecoverCommand { get; private set; }
+        public ICommand NavigateToRegisterCommand { get; private set; }
+
+        public LoginCredentials Login { get; set; }
         public string Title { get; set; }
 
-        public void OnNavigatedFrom(NavigationParameters parameters)
+        public LoginViewModel(INavigationService navigationService, ILoginService loginService, ISessionManager sessionManager, IPageDialogService pageDialogService, IUIServices uiServices) : base(uiServices, navigationService)
         {
+            _loginService = loginService;
+            _sessionManager = sessionManager;
+            _pageDialogService = pageDialogService;
 
+            Title = "Hello";
+            LoginCommand = new DelegateCommand(LoginCommandAction);
+            NavigateToRecoverCommand = new DelegateCommand(async () => await navigationService.NavigateAsync("Recover"));
+            NavigateToRegisterCommand = new DelegateCommand(async () => await navigationService.NavigateAsync("Register"));
         }
 
-        public void OnNavigatedTo(NavigationParameters parameters)
+
+        private async void LoginCommandAction()
         {
-            TestBinding();
+            await _loginService.LogUserAsync(Login);
+            await navigationService.NavigateAsync("EventList");
         }
 
-        public void OnNavigatingTo(NavigationParameters parameters)
+
+        public override void OnNavigatedTo(NavigationParameters parameters)
         {
-
-        }
-
-        void TestBinding()
-        {
-            ShowLoading("Carregando");
-            Task.Run(() =>
-            {
-                Thread.Sleep(2000);
-                HideLoading();
-            });
-
+            Login = new LoginCredentials();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace BasicApp.Database
@@ -11,16 +12,27 @@ namespace BasicApp.Database
         void Update(T entity);
 
         T GetById(int id);
-        T GetOneByPredicate(Func<T, bool> predicate);
-        IEnumerable<T> GetEnumerableByPredicate(Func<T, bool> predicate);
-        List<T> GetListByPredicate(Func<T, bool> predicate);
+        Task<T> GetByIdAsync(int id);
 
-        IEnumerable<T> EnumerateAll();
-        List<T> ListAll();
+        T GetOneByPredicate(Expression<Func<T, bool>> predicate);
+        Task<T> GetOneByPredicateAsync(Expression<Func<T, bool>> predicate);
+
+        List<T> GetListByPredicate(Expression<Func<T, bool>> predicate);
+        Task<List<T>> GetListByPredicateAsync(Expression<Func<T, bool>> predicate);
+
+        List<T> EnumerateAll();
+        Task<List<T>> EnumerateAllAsync();
 
         Task AddAsync(T entity);
         Task RemoveAsync(T entity);
         Task UpdateAsync(T entity);
+
+        void OpenConnection();
+        void OpenAsyncConnection();
+
+        void CloseConnection();
+        void CloseAsyncConnection();
+
 
 
     }

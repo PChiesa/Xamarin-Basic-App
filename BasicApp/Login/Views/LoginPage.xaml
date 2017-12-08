@@ -23,11 +23,11 @@
                     <Label Text="Senha" />
                     <Entry IsPassword="true" Text="{Binding Login.Password}" />
                 </StackLayout>
-                <Button Text="Login" />
+                <Button Text="Login" Command="{Binding LoginCommand}" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Button Text="Esqueci a senha" HorizontalOptions="StartAndExpand" />
-                <Button Text="Criar conta" />
+                <Button Text="Esqueci a senha" HorizontalOptions="StartAndExpand" Command="{Binding NavigateToRecoverCommand}" />
+                <Button Text="Criar conta" Command="{Binding NavigateToRegisterCommand}" />
             </StackLayout>
         </StackLayout>
         <localControls:LoadingIndicatorView IsVisible="{Binding IsLoading}" IsLoading="{Binding IsLoading}" LoadingMessage="{Binding LoadingMessage}" />

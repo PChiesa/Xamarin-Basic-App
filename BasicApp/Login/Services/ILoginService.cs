@@ -6,10 +6,10 @@ namespace BasicApp.Login.Services
 {
     public interface ILoginService
     {
-        Task<User> LogUserAsync(LoginCredentials login);
+        Task LogUserAsync(LoginCredentials login);
 
         Task RecoverPasswordAsync(string email);
 
-        Task<User> RegisterUserAsync(User user);
+        Task RegisterUserAsync(User user);
     }
 }

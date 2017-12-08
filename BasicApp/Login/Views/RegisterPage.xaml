@@ -18,7 +18,8 @@
                 <Label Text="Confirmação de Senha" />
                 <Entry IsPassword="true" Text="{Binding User.PasswordConfirmation}" />
             </StackLayout>
-            <Button Text="Registrar" />
+            <Button Text="Registrar" Command="{Binding RegisterCommand}" />
         </StackLayout>
+        <Button Text="Voltar" Command="{Binding GoBackCommand}" />
     </StackLayout>
 </ContentPage>

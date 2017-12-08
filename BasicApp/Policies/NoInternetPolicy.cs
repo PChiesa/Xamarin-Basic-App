@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using BasicApp.Policies.Exceptions;
+using BasicApp.UI.Services;
 using Polly;
 
 namespace BasicApp.Policies
 {
     public class NoInternetPolicy : IPolicy
     {
-        public NoInternetPolicy()
+        private readonly IUIServices _uiServices;
+
+        public NoInternetPolicy(IUIServices uiServices)
         {
+            _uiServices = uiServices;
         }
 
         /// <summary>
@@ -15,12 +21,17 @@ namespace BasicApp.Policies
         /// </summary>
         /// <returns>The policy.</returns>
         public Policy GetPolicy() => Policy
-            .Handle<NoInternetException>()
-            .WaitAndRetry(
-                new[] { TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(3) },
-                (exception, timeSpan, retryCount, context) =>
+            .Handle<Exception>()
+            .FallbackAsync(
+                async (context) =>
                 {
 
+                    _uiServices.ShowLoading("No internet connection");
+                    Task.Run(() =>
+                    {
+                        Thread.Sleep(2000);
+                        _uiServices.HideLoading();
+                    });
                 });
     }
 }

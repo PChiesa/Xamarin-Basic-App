@@ -6,10 +6,11 @@ using System.Linq;
 using Prism.Navigation;
 using System.Windows.Input;
 using BasicApp.Voucher.Services;
+using BasicApp.UI.Services;
 
 namespace BasicApp.Voucher.ViewModels
 {
-    public class EventVoucherListViewModel : BaseViewModel, INavigationAware
+    public class EventVoucherListViewModel : BaseViewModel
     {
         private readonly IVoucherService _voucherService;
         private readonly INavigationService _navigationService;
@@ -18,7 +19,7 @@ namespace BasicApp.Voucher.ViewModels
         public ICommand FetchEventVoucherListCommand { get; private set; }
 
 
-        public EventVoucherListViewModel(IVoucherService voucherService, INavigationService navigationService)
+        public EventVoucherListViewModel(IVoucherService voucherService, INavigationService navigationService, IUIServices uiServices) : base(uiServices)
         {
             _voucherService = voucherService;
             _navigationService = navigationService;
@@ -29,16 +30,11 @@ namespace BasicApp.Voucher.ViewModels
             });
         }
 
-        public void OnNavigatedFrom(NavigationParameters parameters)
-        {
-        }
 
-        public void OnNavigatedTo(NavigationParameters parameters)
-        {
-        }
 
-        public void OnNavigatingTo(NavigationParameters parameters)
+        public override void OnNavigatingTo(NavigationParameters parameters)
         {
+            base.OnNavigatedTo(parameters);
             Event = parameters.GetValue<Models.Event>("Event");
         }
     }

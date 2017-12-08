@@ -2,15 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" x:Class="BasicApp.Login.Views.RecoverPage">
     <StackLayout Padding="20">
         <StackLayout VerticalOptions="StartAndExpand">
-            <StackLayout Margin="0, 0, 0, 10">
+            <!--<StackLayout Margin="0, 0, 0, 10">
                 <Label Text="CPF" />
                 <Entry Text="{Binding User.Cpf}" />
-            </StackLayout>
+            </StackLayout>-->
             <StackLayout Margin="0, 0, 0, 10">
                 <Label Text="E-mail" />
-                <Entry Text="{Binding User.Email}" />
+                <Entry Text="{Binding Email}" />
             </StackLayout>
-            <Button Text="Recuperar Senha" />
+            <Button Text="Recuperar Senha" Command="{Binding RecoverCommand}" />
         </StackLayout>
+        <Button Text="Voltar" Command="{Binding GoBackCommand}" />
     </StackLayout>
 </ContentPage>

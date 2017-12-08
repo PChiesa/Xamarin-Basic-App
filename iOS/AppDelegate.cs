@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
+using BasicApp.Database;
 using Foundation;
 using Prism.Autofac;
 using UIKit;
@@ -16,9 +17,9 @@ namespace BasicApp.iOS
             global::Xamarin.Forms.Forms.Init();
 
             // Code for starting up the Xamarin Test Cloud Agent
-//#if DEBUG
-//			Xamarin.Calabash.Start();
-//#endif
+            //#if DEBUG
+            //			Xamarin.Calabash.Start();
+            //#endif
 
             LoadApplication(new App(new iOSInitializer()));
 
@@ -31,6 +32,7 @@ namespace BasicApp.iOS
     {
         public void RegisterTypes(ContainerBuilder container)
         {
+            container.RegisterType<SQLite_iOS>().As<ISQLite>();
         }
     }
 

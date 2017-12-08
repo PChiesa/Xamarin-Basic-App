@@ -3,33 +3,68 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Prism.Navigation;
+using BasicApp.UI.Services;
+using System.Windows.Input;
 
 namespace BasicApp
 {
-    public class BaseViewModel : BindableBase
+    public class BaseViewModel : BindableBase, INavigationAware
     {
-        protected void ShowLoading(string message)
+        protected IUIServices uiServices;
+        public INavigationService navigationService;
+        public ICommand GoBackCommand { get; private set; }
+
+        public BaseViewModel()
         {
-            IsLoading = true;
-            LoadingMessage = message;
         }
 
-        protected void HideLoading()
+        public BaseViewModel(IUIServices uiServices)
         {
-            IsLoading = false;
-            LoadingMessage = "";
+            this.uiServices = uiServices;
+        }
+
+        public BaseViewModel(INavigationService navigationService)
+        {
+            this.navigationService = navigationService;
+            this.GoBackCommand = new DelegateCommand(GoBackCommandAction);
+        }
+
+        public BaseViewModel(IUIServices uiServices, INavigationService navigationService)
+        {
+            this.uiServices = uiServices;
+            this.navigationService = navigationService;
+            this.GoBackCommand = new DelegateCommand(GoBackCommandAction);
+        }
+
+        protected async virtual void GoBackCommandAction()
+        {
+            await navigationService.GoBackAsync();
+        }
+
+        public virtual void OnNavigatedFrom(NavigationParameters parameters)
+        {
+
+        }
+
+        public virtual void OnNavigatedTo(NavigationParameters parameters)
+        {
+
+        }
+
+        public virtual void OnNavigatingTo(NavigationParameters parameters)
+        {
+            uiServices.SetCurrentViewModel(this);
         }
 
         public bool IsLoading
         {
-            get;
-            protected set;
+            get; set;
         }
 
         public string LoadingMessage
         {
-            get;
-            protected set;
+            get; set;
         }
     }
 }
