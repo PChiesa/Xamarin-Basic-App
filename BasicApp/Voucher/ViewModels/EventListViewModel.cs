@@ -32,7 +32,29 @@ namespace BasicApp.Voucher.ViewModels
 
         private async void GetEventsCommandAction()
         {
-            Events = await _voucherService.GetEvents() ?? new List<Models.Event>();
+            Events = await _voucherService.GetEvents() ?? new List<Models.Event>(){
+                new Models.Event(){
+                    Name = "Ev1"
+                },
+                new Models.Event(){
+                    Name = "Ev1"
+                },
+                new Models.Event(){
+                    Name = "Ev1"
+                },
+                new Models.Event(){
+                    Name = "Ev1"
+                },
+                new Models.Event(){
+                    Name = "Ev1"
+                },
+                new Models.Event(){
+                    Name = "Ev1"
+                },
+                new Models.Event(){
+                    Name = "Ev1"
+                }
+            };
         }
 
         private async void SelectEventCommandAction(Models.Event ev)

@@ -24,9 +24,20 @@ namespace BasicApp.Database
             _connection = _sqlite.GetConnection();
         }
 
-        public void OpenAsyncConnection()
+        public async Task OpenAsyncConnection()
         {
             _asyncConnection = _sqlite.GetAsyncConnection();
+
+            try
+            {
+                await _asyncConnection.Table<T>().CountAsync();
+            }
+            catch (SQLiteException)
+            {
+                await _asyncConnection.CreateTableAsync<T>();
+            }
+
+
         }
 
         public void CloseConnection()
@@ -34,9 +45,12 @@ namespace BasicApp.Database
             _connection.Close();
         }
 
-        public void CloseAsyncConnection()
+        public async Task CloseAsyncConnection()
         {
-            _asyncConnection.GetConnection().Close();
+            await Task.Run(() =>
+            {
+                _asyncConnection.GetConnection().Close();
+            });
         }
 
         public void Add(T entity)

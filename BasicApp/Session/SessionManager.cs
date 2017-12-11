@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using BasicApp.Database;
 using BasicApp.Login.Models;
 using BasicApp.Policies;
 using BasicApp.Policies.Exceptions;
@@ -9,9 +11,11 @@ namespace BasicApp.Session
     {
         private User _loggedUser;
         private readonly IPolicyWrapper<User> _policies;
+        private readonly IBaseRepository<User> _userRepository;
 
-        public SessionManager(IPolicyWrapper<User> policies)
+        public SessionManager(IPolicyWrapper<User> policies, IBaseRepository<User> userRepository)
         {
+            _userRepository = userRepository;
             _policies = policies;
         }
 
@@ -22,7 +26,24 @@ namespace BasicApp.Session
 
         public int GetUserId()
         {
-            return 1;
+            try
+            {
+                return this._loggedUser.Id;
+            }
+            catch (NullReferenceException)
+            {
+                _userRepository.OpenConnection();
+                var id = _userRepository.EnumerateAll().FirstOrDefault()?.Id ?? 0;
+
+                _userRepository.CloseConnection();
+
+                return id;
+            }
+            finally
+            {
+
+            }
+
             //return _policies.GetVoidPolicies().Execute(() =>
             //{
             //    if (this._loggedUser == null)

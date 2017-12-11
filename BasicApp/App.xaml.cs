@@ -28,7 +28,10 @@ namespace BasicApp
         {
             try
             {
-                await NavigationService.NavigateAsync("Login");
+                if (Container.Resolve<ISessionManager>().GetUserId() == 0)
+                    await NavigationService.NavigateAsync("Login");
+                else
+                    await NavigationService.NavigateAsync("EventList");
             }
             catch (Exception ex)
             {
@@ -43,10 +46,9 @@ namespace BasicApp
             VoucherModule.Initialize(Builder);
             Builder.RegisterType<SessionManager>().As<ISessionManager>().SingleInstance();
             Builder.RegisterType<UIServices>().As<IUIServices>().SingleInstance();
-            //Builder.RegisterType<PolicyWrapper>().As<IPolicyWrapper>().SingleInstance();
             Builder.RegisterType<ConnectivityService>().As<IConnectivityService>();
-            Builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>));
-            Builder.RegisterGeneric(typeof(PolicyWrapper<>)).As(typeof(IPolicyWrapper<>));
+            Builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).SingleInstance();
+            Builder.RegisterGeneric(typeof(PolicyWrapper<>)).As(typeof(IPolicyWrapper<>)).SingleInstance();
         }
     }
 }

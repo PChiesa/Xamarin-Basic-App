@@ -11,8 +11,8 @@ namespace BasicApp.Login.Services
         [Post("/Login/LogUser")]
         Task<User> LogUserAsync([Body] LoginCredentials login);
 
-        [Post("/Login/RecoverPassword")]
-        Task RecoverPasswordAsync([Body] string email);
+        [Get("/Login/RecoverPassword/{email}")]
+        Task RecoverPasswordAsync(string email);
 
         [Post("/Login/RegisterUser")]
         Task<User> RegisterUserAsync([Body] User user);

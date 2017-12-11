@@ -28,10 +28,10 @@ namespace BasicApp.Database
         Task UpdateAsync(T entity);
 
         void OpenConnection();
-        void OpenAsyncConnection();
+        Task OpenAsyncConnection();
 
         void CloseConnection();
-        void CloseAsyncConnection();
+        Task CloseAsyncConnection();
 
 
 

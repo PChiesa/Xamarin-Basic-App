@@ -43,8 +43,9 @@ namespace BasicApp.Login.ViewModels
 
         private async void LoginCommandAction()
         {
-            await _loginService.LogUserAsync(Login);
-            await navigationService.NavigateAsync("EventList");
+            var user = await _loginService.LogUserAsync(Login);
+            if (user != null)
+                await navigationService.NavigateAsync("EventList");
         }
 
 

@@ -88,6 +88,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Database\BaseRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Policies\IPolicyWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Policies\Exceptions\UserNotFoundException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Models\Store.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Login\" />

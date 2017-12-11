@@ -6,7 +6,7 @@ namespace BasicApp.Login.Services
 {
     public interface ILoginService
     {
-        Task LogUserAsync(LoginCredentials login);
+        Task<User> LogUserAsync(LoginCredentials login);
 
         Task RecoverPasswordAsync(string email);
 

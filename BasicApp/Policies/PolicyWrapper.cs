@@ -12,6 +12,7 @@ using System.Threading;
 using Xamarin.Forms;
 using System.Net.Http;
 using BasicApp.Voucher.Models;
+using Refit;
 
 namespace BasicApp.Policies
 {
@@ -57,13 +58,14 @@ namespace BasicApp.Policies
                                                 });
 
             _failedRequestPolicy = Policy<T>.Handle<HttpRequestException>()
-                                         .FallbackAsync(
-                                             async cancellationToken =>
-                                             {
-                                                 _uiServices.HideLoading();
-                                                 Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", "Erro durante a requisição, tente novamente", "Fechar"));
-                                                 return null;
-                                             });
+                                            .Or<ApiException>()
+                                            .FallbackAsync(
+                                                 async cancellationToken =>
+                                                 {
+                                                     _uiServices.HideLoading();
+                                                     Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", "Erro durante a requisição, tente novamente", "Fechar"));
+                                                     return null;
+                                                 });
 
             _userNotFoundPolicy = Policy<T>.Handle<UserNotFoundException>()
                                         .FallbackAsync(

@@ -31,27 +31,27 @@ namespace BasicApp.Login.Services
             _api = RestService.For<ILoginApi>(Constants.DEFAULT_API_ENDPOINT);
         }
 
-        public async Task LogUserAsync(LoginCredentials login)
+        public async Task<User> LogUserAsync(LoginCredentials login)
         {
             _uiServices.ShowLoading("Login em andamento, aguarde...");
 
-            await _policies.GetPolicies().ExecuteAsync(async () =>
-             {
-                 if (!_connectivityService.IsConnected()) throw new NoInternetException();
+            return await _policies.GetPolicies().ExecuteAsync(async () =>
+            {
+                if (!_connectivityService.IsConnected()) throw new NoInternetException();
 
-                 var user = await _api.LogUserAsync(login);
-                 if (user == null)
-                     throw new UserNotFoundException();
+                var user = await _api.LogUserAsync(login);
+                if (user == null)
+                    throw new UserNotFoundException();
 
-                 _userRepository.OpenAsyncConnection();
-                 await _userRepository.AddAsync(user);
-                 _userRepository.CloseAsyncConnection();
+                await _userRepository.OpenAsyncConnection();
+                await _userRepository.AddAsync(user);
+                await _userRepository.CloseAsyncConnection();
 
-                 _sessionManager.StartSession(user);
-                 _uiServices.HideLoading();
+                _sessionManager.StartSession(user);
+                _uiServices.HideLoading();
 
-                 return user;
-             });
+                return user;
+            });
         }
 
         public async Task RecoverPasswordAsync(string email)
