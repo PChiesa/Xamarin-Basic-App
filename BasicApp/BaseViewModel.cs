@@ -6,6 +6,11 @@ using System.Linq;
 using Prism.Navigation;
 using BasicApp.UI.Services;
 using System.Windows.Input;
+using Xamarin.Forms;
+using Prism.Autofac;
+using Prism.Events;
+using Autofac;
+using BasicApp.UI.PubSubEvents;
 
 namespace BasicApp
 {
@@ -14,20 +19,26 @@ namespace BasicApp
         protected IUIServices uiServices;
         public INavigationService navigationService;
         public ICommand GoBackCommand { get; private set; }
+        public ICommand LogoutCommand { get; private set; }
 
-        public BaseViewModel()
-        {
-        }
+        //public BaseViewModel()
+        //{
+        //    this.GoBackCommand = new DelegateCommand(GoBackCommandAction);
+        //    this.LogoutCommand = new DelegateCommand(LogoutCommandAction);
+        //}
 
-        public BaseViewModel(IUIServices uiServices)
-        {
-            this.uiServices = uiServices;
-        }
+        //public BaseViewModel(IUIServices uiServices)
+        //{
+        //    this.uiServices = uiServices;
+        //    this.GoBackCommand = new DelegateCommand(GoBackCommandAction);
+        //    this.LogoutCommand = new DelegateCommand(LogoutCommandAction);
+        //}
 
         public BaseViewModel(INavigationService navigationService)
         {
             this.navigationService = navigationService;
             this.GoBackCommand = new DelegateCommand(GoBackCommandAction);
+            this.LogoutCommand = new DelegateCommand(LogoutCommandAction);
         }
 
         public BaseViewModel(IUIServices uiServices, INavigationService navigationService)
@@ -35,6 +46,15 @@ namespace BasicApp
             this.uiServices = uiServices;
             this.navigationService = navigationService;
             this.GoBackCommand = new DelegateCommand(GoBackCommandAction);
+            this.LogoutCommand = new DelegateCommand(LogoutCommandAction);
+        }
+
+        protected async virtual void LogoutCommandAction()
+        {
+            await navigationService.GoBackToRootAsync();
+            await navigationService.NavigateAsync("Login", useModalNavigation: true);
+            var eventAggregator = (Application.Current as PrismApplication).Container.Resolve<IEventAggregator>();
+            eventAggregator.GetEvent<LogoutEvent>().Publish();
         }
 
         protected async virtual void GoBackCommandAction()

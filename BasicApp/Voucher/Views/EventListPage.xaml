@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" x:Class="BasicApp.Voucher.Views.EventListPage">
+<ContentPage Title="Eventos" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" xmlns:localControls="clr-namespace:BasicApp.UI.Controls" x:Class="BasicApp.Voucher.Views.EventListPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="RefreshEvents" Order="Primary" Text="Recarregar" Priority="0" Command="{Binding GetEventsCommand}" />
+    </ContentPage.ToolbarItems>
     <Grid>
         <StackLayout Padding="0,20,0,20">
             <ListView ItemsSource="{Binding Events}">
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectEventCommand}" EventArgsParameterPath="Item" />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -13,7 +19,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="Sair" HorizontalOptions="Center" />
+            <Button Text="Sair" Command="{Binding LogoutCommand}" HorizontalOptions="Center" />
         </StackLayout>
+        <localControls:LoadingIndicatorView IsVisible="{Binding IsLoading}" IsLoading="{Binding IsLoading}" LoadingMessage="{Binding LoadingMessage}" />
     </Grid>
 </ContentPage>

@@ -1,3 +1,16 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" x:Class="BasicApp.Voucher.Views.EventVoucherListPage">
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage Title="VoucherSeguro®" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" xmlns:localControls="clr-namespace:BasicApp.UI.Controls" xmlns:carousel="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" x:Class="BasicApp.Voucher.Views.EventVoucherListPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="RefreshEvents" Order="Primary" Text="Recarregar" Priority="0" Command="{Binding GetEventVoucherListCommand}" />
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <carousel:CarouselView ItemsSource="{Binding Event.VoucherList}">
+            <carousel:CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <localControls:VoucherView />
+                </DataTemplate>
+            </carousel:CarouselView.ItemTemplate>
+        </carousel:CarouselView>
+        <localControls:LoadingIndicatorView IsVisible="{Binding IsLoading}" IsLoading="{Binding IsLoading}" LoadingMessage="{Binding LoadingMessage}" />
+    </Grid>
 </ContentPage>

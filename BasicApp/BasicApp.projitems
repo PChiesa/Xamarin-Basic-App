@@ -29,6 +29,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Voucher\Views\VoucherTestPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\Controls\VoucherView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -89,6 +96,28 @@
     <Compile Include="$(MSBuildThisFileDirectory)Policies\IPolicyWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Policies\Exceptions\UserNotFoundException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Voucher\Models\Store.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Totp\IKeyProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Totp\InMemoryKey.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Totp\KeyUtilities.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Totp\Otp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Totp\OtpHashMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Totp\TimeCorrection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Totp\Totp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Policies\Exceptions\QrCodeException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Views\VoucherTestPage.xaml.cs">
+      <DependentUpon>VoucherTestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Controls\VoucherView.xaml.cs">
+      <DependentUpon>VoucherView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)UI\RootNavigationPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Services\ITotpCodeService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Services\TotpCodeService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Services\IBarCodeService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Services\BarCodeService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\PubSubEvents\QrCodeRefreshEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\PubSubEvents\VoucherEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\PubSubEvents\LogoutEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Login\" />
@@ -110,5 +139,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)UI\Behaviors\" />
     <Folder Include="$(MSBuildThisFileDirectory)UI\Controls\" />
     <Folder Include="$(MSBuildThisFileDirectory)UI\Services\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Totp\" />
+    <Folder Include="$(MSBuildThisFileDirectory)UI\PubSubEvents\" />
   </ItemGroup>
 </Project>

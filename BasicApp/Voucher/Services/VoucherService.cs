@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BasicApp.Policies;
 using BasicApp.Session;
+using BasicApp.UI.Services;
 using BasicApp.Voucher.Models;
 using Polly;
 using Refit;
@@ -13,30 +14,47 @@ namespace BasicApp.Voucher.Services
     {
         private readonly IVoucherApi _voucherApi;
         private readonly ISessionManager _sessionManager;
-        private readonly IPolicyWrapper<IEnumerable<Event>> _policies;
+        private readonly IPolicyWrapper<IEnumerable<Event>> _eventPolicies;
+        private readonly IPolicyWrapper<IEnumerable<Models.Voucher>> _voucherPolicies;
+        private readonly IUIServices _uiServices;
 
-        public VoucherService(ISessionManager sessionManager, IPolicyWrapper<IEnumerable<Event>> policies)
+        public VoucherService(ISessionManager sessionManager, IPolicyWrapper<IEnumerable<Event>> eventPolicies, IPolicyWrapper<IEnumerable<Models.Voucher>> voucherPolicies, IUIServices uiServices)
         {
             _voucherApi = RestService.For<IVoucherApi>(Constants.DEFAULT_API_ENDPOINT);
             _sessionManager = sessionManager;
-            _policies = policies;
+            _eventPolicies = eventPolicies;
+            _voucherPolicies = voucherPolicies;
+            _uiServices = uiServices;
         }
 
         public async Task<IEnumerable<Event>> GetEvents()
         {
-            var events = await _policies.GetPolicies().ExecuteAsync(async () =>
+            _uiServices.ShowLoading("Carregando seus Eventos, aguarde");
+
+            var events = await
+                _eventPolicies.GetPolicies().ExecuteAsync(async () =>
                 {
                     return await _voucherApi.GetEvents(_sessionManager.GetUserId(), _sessionManager.GetUserToken());
                 });
 
+            _uiServices.HideLoading();
 
             return events;
         }
 
         public async Task<IEnumerable<Models.Voucher>> GetVouchers(int eventId)
         {
-            return null;
-            //return await _voucherApi.GetVouchers(_sessionManager.GetUserId(), eventId, _sessionManager.GetUserToken());
+            _uiServices.ShowLoading("Carregando VoucherSeguro®, aguarde");
+
+            var vouchers = await
+                _voucherPolicies.GetPolicies().ExecuteAsync(async () =>
+                {
+                    return await _voucherApi.GetVouchers(_sessionManager.GetUserId(), eventId, _sessionManager.GetUserToken());
+                });
+
+            _uiServices.HideLoading();
+
+            return vouchers;
         }
     }
 }

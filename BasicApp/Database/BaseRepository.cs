@@ -4,53 +4,45 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SQLite;
+using Prism.Events;
+using BasicApp.UI.PubSubEvents;
 
 namespace BasicApp.Database
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : IEntity, new()
     {
-        private readonly ISQLite _sqlite;
+        private readonly SQLiteConnection _connection;
+        private readonly SQLiteAsyncConnection _asyncConnection;
 
-        private SQLiteConnection _connection;
-        private SQLiteAsyncConnection _asyncConnection;
+        private readonly IEventAggregator _eventAggregator;
 
-        public BaseRepository(ISQLite sqlite)
+        public BaseRepository(ISQLite sqlite, IEventAggregator eventAggregator)
         {
-            _sqlite = sqlite;
+            _connection = sqlite.GetConnection();
+            _asyncConnection = sqlite.GetAsyncConnection();
+            _eventAggregator = eventAggregator;
+
+            CreateTableIfNonExistent();
+
+            _eventAggregator.GetEvent<LogoutEvent>().Subscribe(async () => await RemoveAllAsync());
         }
 
-        public void OpenConnection()
+        ~BaseRepository()
         {
-            _connection = _sqlite.GetConnection();
+            _connection.Close();
+            _asyncConnection.GetConnection().Close();
         }
 
-        public async Task OpenAsyncConnection()
+        private void CreateTableIfNonExistent()
         {
-            _asyncConnection = _sqlite.GetAsyncConnection();
-
             try
             {
-                await _asyncConnection.Table<T>().CountAsync();
+                _connection.Table<T>().Count();
             }
             catch (SQLiteException)
             {
-                await _asyncConnection.CreateTableAsync<T>();
+                _connection.CreateTable<T>();
             }
-
-
-        }
-
-        public void CloseConnection()
-        {
-            _connection.Close();
-        }
-
-        public async Task CloseAsyncConnection()
-        {
-            await Task.Run(() =>
-            {
-                _asyncConnection.GetConnection().Close();
-            });
         }
 
         public void Add(T entity)
@@ -88,9 +80,9 @@ namespace BasicApp.Database
             throw new NotImplementedException();
         }
 
-        public Task<List<T>> GetListByPredicateAsync(Expression<Func<T, bool>> predicate)
+        public async Task<List<T>> GetListByPredicateAsync(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _asyncConnection.Table<T>().Where(predicate).ToListAsync();
         }
 
         public T GetOneByPredicate(Expression<Func<T, bool>> predicate)
@@ -123,6 +115,18 @@ namespace BasicApp.Database
             throw new NotImplementedException();
         }
 
+        public async Task AddAllAsync(IEnumerable<T> entities)
+        {
+            for (int i = 0; i < entities.Count(); i++)
+            {
+                await AddAsync(entities.ElementAt(i));
+            }
+        }
 
+        public async Task RemoveAllAsync()
+        {
+            await _asyncConnection.DropTableAsync<T>();
+            await _asyncConnection.CreateTableAsync<T>();
+        }
     }
 }

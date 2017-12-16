@@ -23,17 +23,11 @@ namespace BasicApp.Database
         List<T> EnumerateAll();
         Task<List<T>> EnumerateAllAsync();
 
+        Task AddAllAsync(IEnumerable<T> entities);
+        Task RemoveAllAsync();
+
         Task AddAsync(T entity);
         Task RemoveAsync(T entity);
         Task UpdateAsync(T entity);
-
-        void OpenConnection();
-        Task OpenAsyncConnection();
-
-        void CloseConnection();
-        Task CloseAsyncConnection();
-
-
-
     }
 }

@@ -43,9 +43,7 @@ namespace BasicApp.Login.Services
                 if (user == null)
                     throw new UserNotFoundException();
 
-                await _userRepository.OpenAsyncConnection();
                 await _userRepository.AddAsync(user);
-                await _userRepository.CloseAsyncConnection();
 
                 _sessionManager.StartSession(user);
                 _uiServices.HideLoading();

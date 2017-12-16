@@ -10,13 +10,12 @@ namespace BasicApp.Session
     public class SessionManager : ISessionManager
     {
         private User _loggedUser;
-        private readonly IPolicyWrapper<User> _policies;
         private readonly IBaseRepository<User> _userRepository;
+        private readonly IBaseRepository<Voucher.Models.Voucher> _voucherRepository;
 
-        public SessionManager(IPolicyWrapper<User> policies, IBaseRepository<User> userRepository)
+        public SessionManager(IBaseRepository<User> userRepository)
         {
             _userRepository = userRepository;
-            _policies = policies;
         }
 
         public void ClearSession()
@@ -32,41 +31,26 @@ namespace BasicApp.Session
             }
             catch (NullReferenceException)
             {
-                _userRepository.OpenConnection();
-                var id = _userRepository.EnumerateAll().FirstOrDefault()?.Id ?? 0;
 
-                _userRepository.CloseConnection();
+                var user = _userRepository.EnumerateAll().FirstOrDefault() ?? throw new EmptySessionException();
+                this.StartSession(user);
 
-                return id;
+                return this._loggedUser.Id;
             }
-            finally
-            {
-
-            }
-
-            //return _policies.GetVoidPolicies().Execute(() =>
-            //{
-            //    if (this._loggedUser == null)
-            //        throw new EmptySessionException();
-            //    if (this._loggedUser.Id == 0)
-            //        throw new EmptySessionException();
-
-            //    return this._loggedUser.Id;
-            //});
         }
 
         public string GetUserToken()
         {
-            return "";
-            //return _policies.GetVoidPolicies().Execute(() =>
-            //{
-            //    if (this._loggedUser == null)
-            //        throw new EmptySessionException();
-            //    if (String.IsNullOrEmpty(this._loggedUser.Token) || String.IsNullOrWhiteSpace(this._loggedUser.Token))
-            //        throw new EmptySessionException();
+            try
+            {
+                return this._loggedUser.Token;
+            }
+            catch (NullReferenceException)
+            {
+                var token = _userRepository.EnumerateAll().FirstOrDefault()?.Token ?? throw new EmptySessionException();
+                return token;
+            }
 
-            //    return this._loggedUser.Token;
-            //});
         }
 
         public void StartSession(User user)
