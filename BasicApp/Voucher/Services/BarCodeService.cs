@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using ZXing;
 using ZXing.Common;
 using ZXing.Mobile;
+using System.IO;
 
 namespace BasicApp.Voucher.Services
 {
@@ -31,16 +32,17 @@ namespace BasicApp.Voucher.Services
                 return ImageSource.FromStream(() => barcode.AsJPEG((nfloat)0.5).AsStream());
 #endif
 
+
 #if __ANDROID__
-
-                QrCode = ImageSource.FromStream(() =>
+                return ImageSource.FromStream(() =>
                 {
-                    var ms = new MemoryStream();
-                    barcode.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 100, ms);
-
-                    ms.Seek(0L, SeekOrigin.Begin);
-
-                    return ms;
+                    using (var ms = new MemoryStream())
+                    {                        
+                        barcode.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 100, ms);
+                        ms.Seek(0L, SeekOrigin.Begin);
+                        return ms;
+                    }
+                    
                 });
 #endif
             }
