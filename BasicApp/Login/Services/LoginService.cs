@@ -8,6 +8,7 @@ using BasicApp.Policies.Exceptions;
 using BasicApp.Session;
 using BasicApp.UI.Services;
 using Refit;
+using System.Net.Http;
 
 namespace BasicApp.Login.Services
 {
@@ -40,6 +41,7 @@ namespace BasicApp.Login.Services
                 if (!_connectivityService.IsConnected()) throw new NoInternetException();
 
                 var user = await _api.LogUserAsync(login);
+                _uiServices.HideLoading();
                 if (user == null)
                     throw new UserNotFoundException();
 
@@ -49,6 +51,7 @@ namespace BasicApp.Login.Services
                 _uiServices.HideLoading();
 
                 return user;
+
             });
         }
 

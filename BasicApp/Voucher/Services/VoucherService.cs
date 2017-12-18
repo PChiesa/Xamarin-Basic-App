@@ -34,7 +34,7 @@ namespace BasicApp.Voucher.Services
             var events = await
                 _eventPolicies.GetPolicies().ExecuteAsync(async () =>
                 {
-                    return await _voucherApi.GetEvents(_sessionManager.GetUserId(), _sessionManager.GetUserToken());
+                    return await _voucherApi.GetEventsAsync(_sessionManager.GetUserId(), _sessionManager.GetUserToken());
                 });
 
             _uiServices.HideLoading();
@@ -49,7 +49,7 @@ namespace BasicApp.Voucher.Services
             var vouchers = await
                 _voucherPolicies.GetPolicies().ExecuteAsync(async () =>
                 {
-                    return await _voucherApi.GetVouchers(_sessionManager.GetUserId(), eventId, _sessionManager.GetUserToken());
+                    return await _voucherApi.GetVouchersAsync(_sessionManager.GetUserId(), eventId, _sessionManager.GetUserToken());
                 });
 
             _uiServices.HideLoading();

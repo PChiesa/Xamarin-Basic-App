@@ -13,6 +13,7 @@ using Xamarin.Forms;
 using System.Net.Http;
 using BasicApp.Voucher.Models;
 using Refit;
+using System.Net;
 
 namespace BasicApp.Policies
 {
@@ -63,8 +64,25 @@ namespace BasicApp.Policies
                                                  async cancellationToken =>
                                                  {
                                                      _uiServices.HideLoading();
-                                                     Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", "Erro durante a requisição, tente novamente", "Fechar"));
                                                      return null;
+                                                 },
+                                                 async (c) =>
+                                                 {
+                                                     await Task.Run(() =>
+                                                     {
+                                                         if (c.Exception is HttpRequestException)
+                                                             Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", "Erro durante a requisição, tente novamente", "Fechar"));
+
+
+                                                         if (c.Exception is ApiException)
+                                                         {
+                                                             if ((c.Exception as ApiException).StatusCode == HttpStatusCode.InternalServerError)
+                                                                 Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", "Erro durante a requisição, tente novamente", "Fechar"));
+
+                                                             if ((c.Exception as ApiException).StatusCode == HttpStatusCode.Unauthorized)
+                                                                 Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", "Credenciais inválidas, faça login novamente", "Fechar"));
+                                                         }
+                                                     });
                                                  });
 
             _userNotFoundPolicy = Policy<T>.Handle<UserNotFoundException>()
@@ -79,7 +97,7 @@ namespace BasicApp.Policies
                                         .FallbackAsync(
                                         async ct =>
                                         {
-                                            await _pageDialogService.DisplayAlertAsync("Atenção", "Sua sessão expirou, efetue login novamente", "OK");
+                                            await _pageDialogService.DisplayAlertAsync("Atenção", "Sua sessão expirou, efetue login novamente", "Fechar");
                                             await _uiServices.GetCurrentViewModel().navigationService.GoBackToRootAsync();
                                             await _uiServices.GetCurrentViewModel().navigationService.NavigateAsync("Login");
                                             return null;

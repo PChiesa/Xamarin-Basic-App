@@ -10,9 +10,9 @@ namespace BasicApp.Voucher.Services
     public interface IVoucherApi
     {
         [Get("/Voucher/GetEvents/{userId}")]
-        Task<IEnumerable<Event>> GetEvents(int userId, [Header("Authorization")] string authorization);
+        Task<IEnumerable<Event>> GetEventsAsync(int userId, [Header("Authorization")] string authorization);
 
         [Get("/Voucher/GetVouchers/{eventId}/{userId}")]
-        Task<IEnumerable<Models.Voucher>> GetVouchers(int userId, int eventId, [Header("Authorization")] string authorization);
+        Task<IEnumerable<Models.Voucher>> GetVouchersAsync(int userId, int eventId, [Header("Authorization")] string authorization);
     }
 }
