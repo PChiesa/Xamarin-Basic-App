@@ -27,7 +27,12 @@ namespace BasicApp.Login.ViewModels
         private async void RegisterCommandAction()
         {
             await _loginService.RegisterUserAsync(User);
-            await navigationService.NavigateAsync("EventList");
+        }
+
+        public override void OnNavigatingTo(NavigationParameters parameters)
+        {
+            base.OnNavigatingTo(parameters);
+            this.User = new User();
         }
     }
 }

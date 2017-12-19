@@ -76,11 +76,24 @@ namespace BasicApp.Policies
 
                                                          if (c.Exception is ApiException)
                                                          {
-                                                             if ((c.Exception as ApiException).StatusCode == HttpStatusCode.InternalServerError)
+                                                             var api = (c.Exception as ApiException);
+
+                                                             if (api.StatusCode == HttpStatusCode.InternalServerError)
                                                                  Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", "Erro durante a requisição, tente novamente", "Fechar"));
 
-                                                             if ((c.Exception as ApiException).StatusCode == HttpStatusCode.Unauthorized)
+                                                             if (api.StatusCode == HttpStatusCode.Unauthorized)
                                                                  Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", "Credenciais inválidas, faça login novamente", "Fechar"));
+
+                                                             if (api.StatusCode == HttpStatusCode.NotFound)
+                                                             {
+
+                                                                 if (!string.IsNullOrEmpty(api.Content))
+                                                                     Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", api.Content, "Fechar"));
+                                                                 else
+                                                                     Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", "Recurso não encontrado, tente novamente", "Fechar"));
+
+
+                                                             }
                                                          }
                                                      });
                                                  });
@@ -97,8 +110,15 @@ namespace BasicApp.Policies
                                         .FallbackAsync(
                                         async ct =>
                                         {
-                                            await _pageDialogService.DisplayAlertAsync("Atenção", "Sua sessão expirou, efetue login novamente", "Fechar");
-                                            await _uiServices.GetCurrentViewModel().navigationService.GoBackToRootAsync();
+                                            await _pageDialogService.DisplayAlertAsync("Atenção", "Credenciais não encontradas, efetue login novamente", "Fechar");
+                                            try
+                                            {
+                                                await _uiServices.GetCurrentViewModel().navigationService.GoBackToRootAsync();
+                                            }
+                                            catch (Exception)
+                                            {
+                                            }
+
                                             await _uiServices.GetCurrentViewModel().navigationService.NavigateAsync("Login");
                                             return null;
                                         });

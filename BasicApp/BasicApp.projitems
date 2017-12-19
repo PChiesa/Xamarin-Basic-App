@@ -65,6 +65,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Connectivity\IConnectivityService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Connectivity\ConnectivityService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Policies\Exceptions\NoInternetException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Enums\VoucherStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Voucher\ViewModels\EventListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Voucher\VoucherModule.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Voucher\Views\EventListPage.xaml.cs">
@@ -129,7 +130,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Policies\" />
     <Folder Include="$(MSBuildThisFileDirectory)Connectivity\" />
     <Folder Include="$(MSBuildThisFileDirectory)Policies\Exceptions\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Voucher\" />
     <Folder Include="$(MSBuildThisFileDirectory)Voucher\Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Voucher\Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)Voucher\ViewModels\" />

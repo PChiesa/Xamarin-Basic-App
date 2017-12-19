@@ -1,5 +1,6 @@
 ﻿using System;
 using BasicApp.Login.Models;
+using System.Threading.Tasks;
 
 namespace BasicApp.Session
 {
@@ -11,6 +12,6 @@ namespace BasicApp.Session
 
         void ClearSession();
 
-        void StartSession(User user);
+        Task StartSessionAsync(User user);
     }
 }

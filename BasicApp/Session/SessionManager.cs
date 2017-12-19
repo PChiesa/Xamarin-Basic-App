@@ -4,6 +4,7 @@ using BasicApp.Database;
 using BasicApp.Login.Models;
 using BasicApp.Policies;
 using BasicApp.Policies.Exceptions;
+using System.Threading.Tasks;
 
 namespace BasicApp.Session
 {
@@ -33,7 +34,7 @@ namespace BasicApp.Session
             {
 
                 var user = _userRepository.EnumerateAll().FirstOrDefault() ?? throw new EmptySessionException();
-                this.StartSession(user);
+                this._loggedUser = user;
 
                 return this._loggedUser.Id;
             }
@@ -47,15 +48,20 @@ namespace BasicApp.Session
             }
             catch (NullReferenceException)
             {
-                var token = _userRepository.EnumerateAll().FirstOrDefault()?.Token ?? throw new EmptySessionException();
-                return token;
+                var user = _userRepository.EnumerateAll().FirstOrDefault() ?? throw new EmptySessionException();
+                this._loggedUser = user;
+                return this._loggedUser.Token;
             }
 
         }
 
-        public void StartSession(User user)
+        public async Task StartSessionAsync(User user)
         {
             this._loggedUser = user;
+
+            await _userRepository.RemoveAllAsync();
+            await _userRepository.AddAsync(user);
+
         }
     }
 }

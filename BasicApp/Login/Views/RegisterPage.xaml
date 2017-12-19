@@ -4,6 +4,10 @@
         <StackLayout Padding="20">
             <StackLayout VerticalOptions="StartAndExpand">
                 <StackLayout Margin="0, 0, 0, 10">
+                    <Label Text="Nome" />
+                    <Entry Text="{Binding User.Name}" />
+                </StackLayout>
+                <StackLayout Margin="0, 0, 0, 10">
                     <Label Text="CPF" />
                     <Entry Text="{Binding User.Cpf}" />
                 </StackLayout>

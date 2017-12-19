@@ -45,9 +45,7 @@ namespace BasicApp.Login.Services
                 if (user == null)
                     throw new UserNotFoundException();
 
-                await _userRepository.AddAsync(user);
-
-                _sessionManager.StartSession(user);
+                await _sessionManager.StartSessionAsync(user);
                 _uiServices.HideLoading();
 
                 return user;
@@ -81,15 +79,21 @@ namespace BasicApp.Login.Services
             {
                 if (!_connectivityService.IsConnected()) throw new NoInternetException();
 
-                await _api.RegisterUserAsync(user);
+                var newUser = await _api.RegisterUserAsync(user);
                 _uiServices.HideLoading();
-                await _uiServices
+
+                if (newUser != null)
+                {
+                    await _uiServices
                     .GetPageDialogService()
                     .DisplayAlertAsync("Sucesso", "Usuário criado", "Fechar");
+
+                    await _sessionManager.StartSessionAsync(newUser);
+                    await _uiServices.GetCurrentViewModel().navigationService.NavigateAsync("RootNavigation/EventList");
+                }
+
                 return null;
             });
-
-
         }
     }
 }
