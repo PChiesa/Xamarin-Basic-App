@@ -18,7 +18,7 @@ namespace BasicApp.UI.Behaviors
 
             try
             {
-                entry.Text = entry.Text.Replace(".", "").Replace("-", ""); //Remove previous caracters
+                entry.Text = entry.Text?.Replace(".", "").Replace("-", ""); //Remove previous caracters
                 entry.Text = String.Format(@"{0:\000\.000\.000\-00}", Convert.ToInt64(entry.Text)).Substring(1); //Substring(1) to remove a leading 0
             }
             catch (FormatException)

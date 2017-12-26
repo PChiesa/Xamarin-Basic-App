@@ -36,13 +36,10 @@ namespace BasicApp.Voucher.Services
 #if __ANDROID__
                 return ImageSource.FromStream(() =>
                 {
-                    using (var ms = new MemoryStream())
-                    {                        
-                        barcode.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 100, ms);
-                        ms.Seek(0L, SeekOrigin.Begin);
-                        return ms;
-                    }
-                    
+                    var ms = new MemoryStream();
+                    barcode.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 100, ms);
+                    ms.Seek(0L, SeekOrigin.Begin);
+                    return ms;
                 });
 #endif
             }
