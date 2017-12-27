@@ -3,14 +3,14 @@
     <Grid>
         <StackLayout Padding="20" VerticalOptions="FillAndExpand">
             <StackLayout VerticalOptions="StartAndExpand">
-                <StackLayout Margin="0, 0, 0, 10">
+                <!--<StackLayout Margin="0, 0, 0, 10">
                     <Label Text="CPF" />
                     <Entry Text="{Binding Login.Cpf}">
                         <Entry.Behaviors>
                             <localBehaviors:CpfEntryBehavior />
                         </Entry.Behaviors>
                     </Entry>
-                </StackLayout>
+                </StackLayout>-->
                 <StackLayout Margin="0, 0, 0, 10">
                     <Label Text="E-mail" />
                     <Entry Text="{Binding Login.Email}">
