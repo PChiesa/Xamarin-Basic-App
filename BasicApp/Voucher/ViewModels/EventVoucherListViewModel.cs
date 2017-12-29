@@ -61,7 +61,7 @@ namespace BasicApp.Voucher.ViewModels
             var voucher = args.Voucher;
             var token = _totpCodeService.GenerateCode(voucher.Token);
 
-            voucher.QrCode = _barCodeService.GenerateQrCode(token, QR_CODE_WIDTH, QR_CODE_HEIGHT);
+            voucher.QrCode = _barCodeService.GenerateQrCode("9" + voucher.Id.ToString("D7") + token, QR_CODE_WIDTH, QR_CODE_HEIGHT);
         }
 
 
