@@ -28,12 +28,10 @@ namespace BasicApp
 
         protected override async void OnInitialized()
         {
-            //MainPage = new VoucherTestPage();
-
             try
             {
                 if (Container.Resolve<ISessionManager>().GetUserId() > 0)
-                    await NavigationService.NavigateAsync("RootNavigation/EventList");
+                    await NavigationService.NavigateAsync("RootMasterDetail/RootNavigation/EventList");
             }
             catch (EmptySessionException)
             {
@@ -51,6 +49,7 @@ namespace BasicApp
             LoginModule.Initialize(Builder);
             VoucherModule.Initialize(Builder);
 
+            Builder.RegisterTypeForNavigation<RootMasterDetailPage, RootMasterDetailViewModel>("RootMasterDetail");
             Builder.RegisterTypeForNavigation<RootNavigationPage>("RootNavigation");
             Builder.RegisterType<SessionManager>().As<ISessionManager>().SingleInstance();
             Builder.RegisterType<UIServices>().As<IUIServices>().SingleInstance();

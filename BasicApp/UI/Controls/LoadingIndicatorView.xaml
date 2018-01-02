@@ -2,7 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BasicApp.UI.Controls.LoadingIndicatorView">
     <ContentView.Content>
         <AbsoluteLayout IsVisible="{Binding IsLoading}">
-            <BoxView Color="#999" Opacity=".8" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" />
+            <BoxView Color="#999" Opacity=".9" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All" />
             <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0.5, -1, -1" AbsoluteLayout.LayoutFlags="PositionProportional">
                 <ActivityIndicator IsRunning="true" Scale="1.5" />
                 <Label Margin="0,10,0,0" Text="{Binding LoadingMessage}" />

@@ -13,5 +13,7 @@ namespace BasicApp.Session
         void ClearSession();
 
         Task StartSessionAsync(User user);
+
+        User GetUser();
     }
 }

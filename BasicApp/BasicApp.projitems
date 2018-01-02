@@ -65,6 +65,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Connectivity\IConnectivityService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Connectivity\ConnectivityService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Policies\Exceptions\NoInternetException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\RootMasterDetailPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)UI\RootMasterDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Voucher\Enums\VoucherStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Voucher\ViewModels\EventListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Voucher\VoucherModule.cs" />
@@ -135,11 +139,15 @@
     <Folder Include="$(MSBuildThisFileDirectory)Voucher\ViewModels\" />
     <Folder Include="$(MSBuildThisFileDirectory)Voucher\Views\" />
     <Folder Include="$(MSBuildThisFileDirectory)Session\" />
-    <Folder Include="$(MSBuildThisFileDirectory)UI\" />
     <Folder Include="$(MSBuildThisFileDirectory)UI\Behaviors\" />
     <Folder Include="$(MSBuildThisFileDirectory)UI\Controls\" />
     <Folder Include="$(MSBuildThisFileDirectory)UI\Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)Totp\" />
     <Folder Include="$(MSBuildThisFileDirectory)UI\PubSubEvents\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\RootMasterDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

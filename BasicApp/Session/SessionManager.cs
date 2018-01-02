@@ -24,6 +24,11 @@ namespace BasicApp.Session
             this._loggedUser = null;
         }
 
+        public User GetUser()
+        {
+            return this._loggedUser ?? _userRepository.EnumerateAll().FirstOrDefault() ?? throw new EmptySessionException();
+        }
+
         public int GetUserId()
         {
             try
