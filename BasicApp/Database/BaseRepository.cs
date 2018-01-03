@@ -125,8 +125,23 @@ namespace BasicApp.Database
 
         public async Task RemoveAllAsync()
         {
-            await _asyncConnection.DropTableAsync<T>();
-            await _asyncConnection.CreateTableAsync<T>();
+            try
+            {
+                await _asyncConnection.DropTableAsync<T>();
+            }
+            catch (Exception)
+            {
+                _connection.DropTable<T>();
+            }
+
+            try
+            {
+                await _asyncConnection.CreateTableAsync<T>();
+            }
+            catch (Exception)
+            {
+                _connection.CreateTable<T>();
+            }
         }
     }
 }
