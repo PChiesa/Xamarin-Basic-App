@@ -4,23 +4,40 @@
         <ToolbarItem Name="RefreshEvents" Order="Primary" Text="Recarregar" Priority="0" Command="{Binding GetEventsCommand}" />
     </ContentPage.ToolbarItems>
     <Grid>
-        <StackLayout Padding="0,20,0,20">
-            <ListView ItemsSource="{Binding Events}">
+        <ScrollView>
+            <ListView ItemsSource="{Binding Events}" HasUnevenRows="True" SeparatorColor="#94BD4D">
                 <ListView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectEventCommand}" EventArgsParameterPath="Item" />
                 </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="10,0">
-                                <Label Text="{Binding Name}" />
-                            </StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="2.5*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="120"/>
+                                </Grid.RowDefinitions>
+                                
+                                <StackLayout Grid.Column="0" Padding="10">
+                                    <Image Aspect="AspectFill" VerticalOptions="CenterAndExpand" Source="{Binding Image1}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1" Padding="0, 10, 10, 20" VerticalOptions="CenterAndExpand">
+                                    <Label Style="{StaticResource labelFontMedium}" Text="{Binding Name}" />
+                                    <Label Style="{StaticResource labelFontMedium}" Text="{Binding GetEventDate}" />
+                                    <Label FontSize="Micro" Style="{StaticResource labelFontMedium}" Text="{Binding Description1}" />
+                                    <Label FontSize="Micro" Style="{StaticResource labelFontMedium}" Text="{Binding Store.Name}" />
+                                </StackLayout>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="Sair" Command="{Binding LogoutCommand}" HorizontalOptions="Center" />
-        </StackLayout>
+        </ScrollView>
         <localControls:LoadingIndicatorView IsVisible="{Binding IsLoading}" IsLoading="{Binding IsLoading}" LoadingMessage="{Binding LoadingMessage}" />
     </Grid>
 </ContentPage>
