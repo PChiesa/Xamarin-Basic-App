@@ -13,6 +13,7 @@ using BasicApp.Voucher.Services;
 using Prism.Autofac;
 using Prism.Logging;
 using Xamarin.Forms.Xaml;
+using Xamarin.Forms;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace BasicApp
@@ -24,7 +25,10 @@ namespace BasicApp
             InitializeComponent();
         }
 
-        public App(IPlatformInitializer initializer = null) : base(initializer) { }
+        public App(IPlatformInitializer initializer = null) : base(initializer)
+        {
+            ApplyCustomStyles();
+        }
 
         protected override async void OnInitialized()
         {
@@ -60,6 +64,68 @@ namespace BasicApp
             Builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).SingleInstance();
             Builder.RegisterGeneric(typeof(PolicyWrapper<>)).As(typeof(IPolicyWrapper<>)).SingleInstance();
 
+        }
+
+        private void ApplyCustomStyles()
+        {
+
+
+#if __IOS__
+            const string rezRegular = "";
+            const string montSerratLight = "";
+            const string montSerratRegular = "";
+            const string montSerratMedium = "";
+            const string montSerratBold = "";
+#endif
+#if __ANDROID__
+            const string rezRegular = "Fonts/REZ.ttf#REZ-Regular";
+            const string montSerratLight = "Fonts/MontserratLight.ttf#Montserrat-Light";
+            const string montSerratRegular = "Fonts/MontserratRegular.ttf#Montserrat-Regular";
+            const string montSerratMedium = "Fonts/MontserratMedium.ttf#Montserrat-Medium";
+            const string montSerratBold = "Fonts/MontserratBold.ttf#Montserrat-Bold";
+#endif
+
+            var labelFontBold = new Style(typeof(Label))
+            {
+                Setters = {
+                    new Setter { Property = Label.FontFamilyProperty, Value = montSerratBold}
+                }
+            };
+
+            var labelFontMedium = new Style(typeof(Label))
+            {
+                Setters = {
+                    new Setter { Property = Label.FontFamilyProperty, Value = montSerratMedium}
+                }
+            };
+
+            var labelFontRez = new Style(typeof(Label))
+            {
+                Setters = {
+                    new Setter { Property = Label.FontFamilyProperty, Value = rezRegular}
+                }
+            };
+
+            var buttonStyle = new Style(typeof(Button))
+            {
+                Setters = {
+                    new Setter { Property = Button.FontFamilyProperty, Value = montSerratMedium}
+                }
+            };
+
+            var labelStyle = new Style(typeof(Label))
+            {
+                Setters = {
+                    new Setter { Property = Button.FontFamilyProperty, Value = montSerratRegular}
+                }
+            };
+
+            Resources = new ResourceDictionary();
+            Resources.Add(buttonStyle);
+            Resources.Add(labelStyle);
+            Resources.Add("labelFontBold", labelFontBold);
+            Resources.Add("labelFontMedium", labelFontMedium);
+            Resources.Add("labelFontRez", labelFontRez);
         }
     }
 }
