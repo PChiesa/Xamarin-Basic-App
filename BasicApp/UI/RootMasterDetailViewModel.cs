@@ -7,23 +7,32 @@ using BasicApp.UI.Services;
 using Prism.Navigation;
 using BasicApp.Session;
 using BasicApp.Login.Models;
+using System.Windows.Input;
 
 namespace BasicApp.UI
 {
-    public class RootMasterDetailViewModel : BaseViewModel
+    public class RootMasterDetailViewModel : BindableBase, INavigatedAware
     {
-        private readonly ISessionManager _sessionManager;
 
+        private IUIServices _uiServices;
         public User User { get; private set; }
+        public ICommand LogoutCommand { get; private set; }
 
-        public RootMasterDetailViewModel(ISessionManager sessionManager, IUIServices uiServices, INavigationService navigationService) : base(uiServices, navigationService)
+
+        public RootMasterDetailViewModel(ISessionManager sessionManager, IUIServices uiServices)
         {
-            _sessionManager = sessionManager;
+            this.User = sessionManager.GetUser();
+            _uiServices = uiServices;
         }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
+        public void OnNavigatedFrom(NavigationParameters parameters)
         {
-            this.User = _sessionManager.GetUser();
+
+        }
+
+        public void OnNavigatedTo(NavigationParameters parameters)
+        {
+            LogoutCommand = _uiServices.GetCurrentViewModel().LogoutCommand;
         }
     }
 }
