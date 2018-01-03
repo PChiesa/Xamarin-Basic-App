@@ -45,21 +45,20 @@ namespace BasicApp.Voucher.ViewModels
             //TODO: Move this logic to a service
             if (Events != null)
             {
-                
+                //await _storeRepository.RemoveAllAsync();
+                //await _storeRepository.AddAllAsync(Events.Select(e => e.Store));
+                //Events.ToList().ForEach(x => x.Store = null);
                 await _eventRepository.RemoveAllAsync();
                 await _eventRepository.AddAllAsync(Events);
-
-                await _storeRepository.RemoveAllAsync();
-                await _storeRepository.AddAllAsync(Events.Select(e => e.Store));
             }
             else
             {
                 var events = await _eventRepository.EnumerateAllAsync();
 
-                events.ForEach(async (e) =>
-                {
-                    e.Store = await _storeRepository.GetByIdAsync(e.StoreId);
-                });
+                //events.ForEach(async (e) =>
+                //{
+                //    e.Store = await _storeRepository.GetByIdAsync(e.StoreId);
+                //});
 
                 Events = events;
             }
