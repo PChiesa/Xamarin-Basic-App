@@ -221,6 +221,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <AndroidAsset Include="Assets\Fonts\REZ.ttf" />
+    <AndroidAsset Include="Assets\Fonts\MontserratRegular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\MontserratBold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\MontserratLight.ttf" />
+    <AndroidAsset Include="Assets\Fonts\MontserratMedium.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />

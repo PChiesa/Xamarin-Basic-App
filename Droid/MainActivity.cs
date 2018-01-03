@@ -11,10 +11,12 @@ using Prism;
 using Prism.Autofac;
 using Autofac;
 using BasicApp.Database;
+using Android.Graphics;
+using Xamarin.Forms;
 
 namespace BasicApp.Droid
 {
-    [Activity(Label = "VoucherSeguro.com", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "VoucherSeguro.com", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
