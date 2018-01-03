@@ -24,6 +24,9 @@ namespace BasicApp.Voucher.Models
         public string Image3 { get; set; }
 
         [Ignore]
+        public string GetEventDate { get => Date.ToString("dd/MM/yyyy H:mm"); }
+
+        [Ignore]
         public Store Store { get; set; }
 
         [Ignore]
