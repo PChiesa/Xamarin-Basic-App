@@ -6,6 +6,6 @@ namespace BasicApp.Voucher.Enums
 {
     public enum VoucherStatus
     {
-        Active, Expired, Canceled
+        Active, Used, Canceled
     }
 }

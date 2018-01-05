@@ -22,6 +22,7 @@ namespace BasicApp.Voucher.ViewModels
 
         public IEnumerable<Models.Event> Events { get; private set; }
         public ICommand GetEventsCommand { get; private set; }
+        public ICommand GetEventsFromServerCommand { get; private set; }
         public ICommand SelectEventCommand { get; private set; }
 
         public EventListViewModel(IBaseRepository<Event> eventRepository, IBaseRepository<Store> storeRepository, IVoucherService voucherService, INavigationService navigationService, IUIServices uiServices) : base(uiServices, navigationService)
@@ -31,37 +32,22 @@ namespace BasicApp.Voucher.ViewModels
             _eventRepository = eventRepository;
             _storeRepository = storeRepository;
 
-            GetEventsCommand = new DelegateCommand(GetEventsCommandAction);
+            GetEventsCommand = new DelegateCommand(() => GetEventsCommandAction(false));
+            GetEventsFromServerCommand = new DelegateCommand(() => GetEventsCommandAction(true));
 
             SelectEventCommand = new DelegateCommand<Models.Event>(SelectEventCommandAction);
 
         }
 
 
-        private async void GetEventsCommandAction()
+        private async void GetEventsCommandAction(bool updateFromServer)
         {
-            Events = await _voucherService.GetEvents();
+            var events = await _voucherService.GetEvents(updateFromServer);
 
-            //TODO: Move this logic to a service
-            if (Events != null)
-            {
-                //await _storeRepository.RemoveAllAsync();
-                //await _storeRepository.AddAllAsync(Events.Select(e => e.Store));
-                //Events.ToList().ForEach(x => x.Store = null);
-                await _eventRepository.RemoveAllAsync();
-                await _eventRepository.AddAllAsync(Events);
-            }
+            if (events == null)
+                Events = new List<Event>();
             else
-            {
-                var events = await _eventRepository.EnumerateAllAsync();
-
-                //events.ForEach(async (e) =>
-                //{
-                //    e.Store = await _storeRepository.GetByIdAsync(e.StoreId);
-                //});
-
                 Events = events;
-            }
         }
 
         private async void SelectEventCommandAction(Models.Event ev)
@@ -77,7 +63,7 @@ namespace BasicApp.Voucher.ViewModels
             base.OnNavigatedTo(parameters);
             //TODO: Improve this logic
             if (Events == null)
-                GetEventsCommandAction();
+                GetEventsCommandAction(false);
         }
     }
 }

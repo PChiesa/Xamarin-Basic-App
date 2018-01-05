@@ -7,7 +7,7 @@ namespace BasicApp.Voucher.Services
 {
     public interface IVoucherService
     {        
-        Task<IEnumerable<Event>> GetEvents();
+        Task<IEnumerable<Event>> GetEvents(bool updateFromServer);
         Task<IEnumerable<Models.Voucher>> GetVouchers(int eventId);
     }
 }

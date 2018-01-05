@@ -14,6 +14,7 @@ using Prism.Autofac;
 using Prism.Logging;
 using Xamarin.Forms.Xaml;
 using Xamarin.Forms;
+using BasicApp.UI.Converters;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace BasicApp
@@ -27,6 +28,7 @@ namespace BasicApp
 
         public App(IPlatformInitializer initializer = null) : base(initializer)
         {
+            Resources = new ResourceDictionary();
             ApplyCustomStyles();
         }
 
@@ -64,6 +66,11 @@ namespace BasicApp
             Builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).SingleInstance();
             Builder.RegisterGeneric(typeof(PolicyWrapper<>)).As(typeof(IPolicyWrapper<>)).SingleInstance();
 
+        }
+
+        private void ApplyGlobalConverters()
+        {
+            //Resources.Add("lengthToBoolConverter", new LengthToBoolConverter());
         }
 
         private void ApplyCustomStyles()
@@ -120,7 +127,6 @@ namespace BasicApp
                 }
             };
 
-            Resources = new ResourceDictionary();
             Resources.Add(buttonStyle);
             Resources.Add(labelStyle);
             Resources.Add("labelFontBold", labelFontBold);

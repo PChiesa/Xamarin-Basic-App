@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage Title="Eventos" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" xmlns:localControls="clr-namespace:BasicApp.UI.Controls" x:Class="BasicApp.Voucher.Views.EventListPage">
+<ContentPage Title="Eventos" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" xmlns:localControls="clr-namespace:BasicApp.UI.Controls" 
+  xmlns:localConverters="clr-namespace:BasicApp.UI.Converters"
+  x:Class="BasicApp.Voucher.Views.EventListPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="RefreshEvents" Order="Primary" Text="Recarregar" Priority="0" Command="{Binding GetEventsCommand}" />
+        <ToolbarItem Name="RefreshEvents" Order="Primary" Text="Recarregar" Priority="0" Command="{Binding GetEventsFromServerCommand}" />
     </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <localConverters:LengthToBoolConverter x:Key="lengthToBool"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Grid>
         <ScrollView>
             <ListView ItemsSource="{Binding Events}" HasUnevenRows="True" SeparatorColor="#94BD4D">
@@ -21,7 +28,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="120"/>
                                 </Grid.RowDefinitions>
-                                
+
                                 <StackLayout Grid.Column="0" Padding="10">
                                     <Image Aspect="AspectFill" VerticalOptions="CenterAndExpand" Source="{Binding Image1}"/>
                                 </StackLayout>
@@ -38,6 +45,7 @@
                 </ListView.ItemTemplate>
             </ListView>
         </ScrollView>
+        <Label Text="Nenhum evento disponível" IsVisible="{Binding Events, Converter={StaticResource lengthToBool}}" VerticalOptions="Center" HorizontalOptions="Center"/>
         <localControls:LoadingIndicatorView IsVisible="{Binding IsLoading}" IsLoading="{Binding IsLoading}" LoadingMessage="{Binding LoadingMessage}" />
     </Grid>
 </ContentPage>

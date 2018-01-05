@@ -33,10 +33,28 @@ namespace BasicApp.Voucher.Models
         public string Description1 { get; set; }
         public string Description2 { get; set; }
         public string Description3 { get; set; }
+        public string Gate { get; set; }
+        public DateTime EntryDate { get; set; }
         public string Token { get; set; }
+        public DateTime ActivationDate { get; set; }
         public DateTime ExpirationDate { get; set; }
+        public DateTime FinishedDate { get; set; }
         public VoucherStatus CurrentStatus { get; set; }
 
+        [Ignore]
+        public bool IsVoucherPendingActivation => CurrentStatus == VoucherStatus.Active && ActivationDate > DateTime.Now;
+
+        [Ignore]
+        public bool IsVoucherActive => CurrentStatus == VoucherStatus.Active && ActivationDate <= DateTime.Now && !IsVoucherExpired;
+
+        [Ignore]
+        public bool IsVoucherUsed => CurrentStatus == VoucherStatus.Used;
+
+        [Ignore]
+        public bool IsVoucherExpired => ExpirationDate <= DateTime.Now;
+
+        [Ignore]
+        public bool IsVoucherCancelled => CurrentStatus == VoucherStatus.Canceled;
 
         private ImageSource _qrcode;
 

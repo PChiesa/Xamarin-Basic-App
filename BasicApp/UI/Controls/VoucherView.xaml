@@ -3,11 +3,14 @@
     <ContentView.Content>
         <Grid>
             <AbsoluteLayout>
-                <Image Source="{Binding QrCode}" AbsoluteLayout.LayoutBounds=".5,.5,.5,.5" AbsoluteLayout.LayoutFlags="All" />
-                <skia:SKCanvasView x:Name="canvasView" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" />
+                <Image Source="{Binding QrCode}" AbsoluteLayout.LayoutBounds=".5,.5,.5,.5" AbsoluteLayout.LayoutFlags="All"/>
+                <skia:SKCanvasView x:Name="canvasView" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
             </AbsoluteLayout>
             <StackLayout>
-                <Label Text="{Binding Description1}" />
+                <Label Text="Ativo" IsVisible="{Binding IsVoucherActive}" />
+                <Label Text="Ainda vai ativar" IsVisible="{Binding IsVoucherPendingActivation}"/>
+                <Label Text="Expirado" IsVisible="{Binding IsVoucherExpired}"/>
+                <Label Text="Usado" IsVisible="{Binding IsVoucherUsed}" />
             </StackLayout>
         </Grid>
     </ContentView.Content>

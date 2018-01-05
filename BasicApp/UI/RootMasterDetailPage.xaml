@@ -8,15 +8,29 @@
     <MasterDetailPage.Master>
         <ContentPage Title="Menu">
             <StackLayout Padding="20">
-                <Label Text="{Binding User.Name}"/>
-                <Label Text="{Binding User.Cpf}"/>
-                <Label Text="{Binding User.Email}"/>
-                <Image Source="logo.jpg"/>
-                <Image Source="letter.jpg"/>
-
-                <Button Text="Sair" Command="{Binding LogoutCommand}" HorizontalOptions="Center" />
+                <StackLayout VerticalOptions="Start">
+                    <Image Aspect="AspectFill" Source="logowhite.png"/>
+                </StackLayout>
+                <BoxView Margin="0,10,0,10" BackgroundColor="#79AB4E" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Nome:"></Label>
+                        <Label Text="{Binding User.Name}"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Cpf:"></Label>
+                        <Label Text="{Binding User.Cpf}"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="E-mail:"></Label>
+                        <Label Text="{Binding User.Email}"></Label>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout VerticalOptions="EndAndExpand">
+                    <Button Text="Sair" Command="{Binding LogoutCommand}" HorizontalOptions="Fill" />
+                    <Label HorizontalTextAlignment="Center" FontSize="Micro" Text="Versão 1.0"></Label>
+                </StackLayout>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>
-
 </MasterDetailPage>

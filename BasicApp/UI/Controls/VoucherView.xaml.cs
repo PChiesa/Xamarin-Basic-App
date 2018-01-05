@@ -18,6 +18,7 @@ namespace BasicApp.UI.Controls
         private Animation _circleProgress;
         private bool _repeatAnimation = true;
         private readonly IEventAggregator _eventAggregator;
+        private Voucher.Models.Voucher _voucher;
 
         public VoucherView()
         {
@@ -31,9 +32,14 @@ namespace BasicApp.UI.Controls
 
             if (this.BindingContext is Voucher.Models.Voucher)
             {
+                _voucher = this.BindingContext as Voucher.Models.Voucher;
+                
+                //if (!_voucher.IsVoucherActive)
+                //    return;
+
                 _eventAggregator
                         .GetEvent<QrCodeRefreshEvent>()
-                    .Publish(new VoucherEventArgs(this.BindingContext as Voucher.Models.Voucher));
+                    .Publish(new VoucherEventArgs(_voucher));
 
                 BeginAnimation();
             }
@@ -58,7 +64,7 @@ namespace BasicApp.UI.Controls
                     repeat: () => _repeatAnimation,
                     finished: (d, b) => _eventAggregator
                         .GetEvent<QrCodeRefreshEvent>()
-                        .Publish(new VoucherEventArgs(this.BindingContext as Voucher.Models.Voucher)));
+                        .Publish(new VoucherEventArgs(_voucher)));
         }
 
         void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
@@ -105,7 +111,7 @@ namespace BasicApp.UI.Controls
             {
                 path.AddArc(rect, START_ANGLE, _endAngle);
                 SKPaint arcPaint;
-                if (_endAngle <= 45)
+                if (_endAngle <= 180)
                     arcPaint = arcPaintGreen;
                 else if (_endAngle >= 315)
                     arcPaint = arcPaintRed;
