@@ -2,8 +2,8 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms" x:Class="BasicApp.UI.Controls.VoucherView">
     <ContentView.Content>
         <AbsoluteLayout>
-            <Image Source="{Binding QrCode}" AbsoluteLayout.LayoutBounds=".5,.5,.45,.5" AbsoluteLayout.LayoutFlags="All" />
-            <skia:SKCanvasView x:Name="canvasView" AbsoluteLayout.LayoutBounds=".5,.5,.5,.5" AbsoluteLayout.LayoutFlags="All" />
+            <Image Source="{Binding QrCode}" AbsoluteLayout.LayoutBounds=".5,.1,.4,.4" AbsoluteLayout.LayoutFlags="All" />
+            <skia:SKCanvasView x:Name="canvasView" AbsoluteLayout.LayoutBounds=".5,.1,.5,.5" AbsoluteLayout.LayoutFlags="All" />
         </AbsoluteLayout>
         <!--<StackLayout>
                 <Label Text="{Binding Description1}" />

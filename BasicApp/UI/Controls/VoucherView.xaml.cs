@@ -51,7 +51,7 @@ namespace BasicApp.UI.Controls
             canvasView.PaintSurface += OnCanvasViewPaintSurface;
             _circleProgress = new Animation((d) =>
                 {
-                    _endAngle = (float)(d * 360);
+                    _endAngle = (float)(d * 100);
                     canvasView.InvalidateSurface();
                 }, 0, 1);
 
@@ -74,7 +74,7 @@ namespace BasicApp.UI.Controls
             SKPaint outlinePaint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
-                StrokeWidth = STROKE_WIDTH + 2,
+                StrokeWidth = STROKE_WIDTH + 3,
                 Color = SKColors.Black
             };
 
@@ -107,45 +107,49 @@ namespace BasicApp.UI.Controls
 
             SKRect rect = new SKRect(CANVAS_SIZE, (info.Height - (info.Width - CANVAS_SIZE)) / 2, info.Width - CANVAS_SIZE, info.Width - CANVAS_SIZE + ((info.Height - (info.Width - CANVAS_SIZE)) / 2));
 
-
-            int size = 360 / 4;
-
             SKPaint arcPaint;
 
-            if (_endAngle <= 180)
+            if (_endAngle <= 75)
                 arcPaint = arcPaintGreen;
-            else if (_endAngle >= 315)
+            else if (_endAngle >= 95)
                 arcPaint = arcPaintRed;
             else
                 arcPaint = arcPaintYellow;
 
 
+            outlinePaint.StrokeCap = SKStrokeCap.Round;
             arcPaint.StrokeCap = SKStrokeCap.Round;
+
+
+            canvas.DrawLine(rect.Left, rect.Bottom, rect.Right, rect.Bottom, outlinePaint);
+
+            canvas.DrawLine(rect.Left, rect.Bottom, rect.Left + (_endAngle * rect.Width) / 100, rect.Bottom, arcPaint);
+
             //canvas.DrawRect(rect, outlinePaint);
 
-            if (_endAngle <= size)
-            {
-                canvas.DrawLine(rect.Left, rect.Top, (rect.Right * _endAngle) / size, rect.Top, arcPaint);
+            //if (_endAngle <= size)
+            //{
+            //    canvas.DrawLine(rect.Left, rect.Top, (rect.Right * _endAngle) / size, rect.Top, arcPaint);
 
-            }
-            else if (_endAngle <= size * 2 && _endAngle > size)
-            {
-                canvas.DrawLine(rect.Left, rect.Top, rect.Right, rect.Top, arcPaint);
-                canvas.DrawLine(rect.Right, rect.Top, rect.Right, (rect.Bottom * (_endAngle % size)) / size, arcPaint);
-            }
-            else if (_endAngle <= size * 3 && _endAngle > size * 2)
-            {
-                canvas.DrawLine(rect.Left, rect.Top, rect.Right, rect.Top, arcPaint);
-                canvas.DrawLine(rect.Right, rect.Top, rect.Right, rect.Bottom, arcPaint);
-                canvas.DrawLine(rect.Right, rect.Bottom, rect.Right - (rect.Right * (_endAngle % size)) / size, rect.Bottom, arcPaint);
-            }
-            else
-            {
-                canvas.DrawLine(rect.Left, rect.Top, rect.Right, rect.Top, arcPaint);
-                canvas.DrawLine(rect.Right, rect.Top, rect.Right, rect.Bottom, arcPaint);
-                canvas.DrawLine(rect.Right, rect.Bottom, rect.Left, rect.Bottom, arcPaint);
-                canvas.DrawLine(rect.Left, rect.Bottom, rect.Left, rect.Bottom - (rect.Bottom * (_endAngle % size)) / size, arcPaint);
-            }
+            //}
+            //else if (_endAngle <= size * 2 && _endAngle > size)
+            //{
+            //    canvas.DrawLine(rect.Left, rect.Top, rect.Right, rect.Top, arcPaint);
+            //    canvas.DrawLine(rect.Right, rect.Top, rect.Right, (rect.Bottom * (_endAngle % size)) / size, arcPaint);
+            //}
+            //else if (_endAngle <= size * 3 && _endAngle > size * 2)
+            //{
+            //    canvas.DrawLine(rect.Left, rect.Top, rect.Right, rect.Top, arcPaint);
+            //    canvas.DrawLine(rect.Right, rect.Top, rect.Right, rect.Bottom, arcPaint);
+            //    canvas.DrawLine(rect.Right, rect.Bottom, rect.Right - (rect.Right * (_endAngle % size)) / size, rect.Bottom, arcPaint);
+            //}
+            //else
+            //{
+            //    canvas.DrawLine(rect.Left, rect.Top, rect.Right, rect.Top, arcPaint);
+            //    canvas.DrawLine(rect.Right, rect.Top, rect.Right, rect.Bottom, arcPaint);
+            //    canvas.DrawLine(rect.Right, rect.Bottom, rect.Left, rect.Bottom, arcPaint);
+            //    canvas.DrawLine(rect.Left, rect.Bottom, rect.Left, rect.Bottom - (rect.Bottom * (_endAngle % size)) / size, arcPaint);
+            //}
 
 
             //canvas.DrawOval(rect, outlinePaint);
