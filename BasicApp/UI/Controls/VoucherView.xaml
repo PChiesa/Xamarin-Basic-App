@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms" x:Class="BasicApp.UI.Controls.VoucherView">
     <ContentView.Content>
-        <Grid>
-            <AbsoluteLayout>
-                <Image Source="{Binding QrCode}" AbsoluteLayout.LayoutBounds=".5,.5,.5,.5" AbsoluteLayout.LayoutFlags="All"/>
-                <skia:SKCanvasView x:Name="canvasView" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
-            </AbsoluteLayout>
-            <StackLayout>
+        <AbsoluteLayout>
+            <Image Source="{Binding QrCode}" AbsoluteLayout.LayoutBounds=".5,.5,.45,.5" AbsoluteLayout.LayoutFlags="All" />
+            <skia:SKCanvasView x:Name="canvasView" AbsoluteLayout.LayoutBounds=".5,.5,.5,.5" AbsoluteLayout.LayoutFlags="All" />
+        </AbsoluteLayout>
+        <!--<StackLayout>
+                <Label Text="{Binding Description1}" />
+                <Label Text="{Binding Description2}" />
+                <Label Text="{Binding Description3}" />
                 <Label Text="Ativo" IsVisible="{Binding IsVoucherActive}" />
-                <Label Text="Ainda vai ativar" IsVisible="{Binding IsVoucherPendingActivation}"/>
-                <Label Text="Expirado" IsVisible="{Binding IsVoucherExpired}"/>
+                <Label Text="Ainda vai ativar" IsVisible="{Binding IsVoucherPendingActivation}" />
+                <Label Text="Expirado" IsVisible="{Binding IsVoucherExpired}" />
                 <Label Text="Usado" IsVisible="{Binding IsVoucherUsed}" />
-            </StackLayout>
-        </Grid>
+            </StackLayout>-->
     </ContentView.Content>
 </ContentView>

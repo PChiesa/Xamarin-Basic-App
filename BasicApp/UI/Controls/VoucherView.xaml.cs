@@ -14,6 +14,7 @@ namespace BasicApp.UI.Controls
     {
         const float START_ANGLE = -90f;
         const float CANVAS_SIZE = 20f;
+        const float STROKE_WIDTH = 15;
         private float _endAngle;
         private Animation _circleProgress;
         private bool _repeatAnimation = true;
@@ -33,7 +34,7 @@ namespace BasicApp.UI.Controls
             if (this.BindingContext is Voucher.Models.Voucher)
             {
                 _voucher = this.BindingContext as Voucher.Models.Voucher;
-                
+
                 //if (!_voucher.IsVoucherActive)
                 //    return;
 
@@ -69,31 +70,32 @@ namespace BasicApp.UI.Controls
 
         void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
+
             SKPaint outlinePaint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
-                StrokeWidth = 32,
+                StrokeWidth = STROKE_WIDTH + 2,
                 Color = SKColors.Black
             };
 
             SKPaint arcPaintGreen = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
-                StrokeWidth = 30,
+                StrokeWidth = STROKE_WIDTH,
                 Color = SKColors.Green
             };
 
             SKPaint arcPaintYellow = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
-                StrokeWidth = 30,
+                StrokeWidth = STROKE_WIDTH,
                 Color = SKColors.Yellow
             };
 
             SKPaint arcPaintRed = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
-                StrokeWidth = 30,
+                StrokeWidth = STROKE_WIDTH,
                 Color = SKColors.Red
             };
 
@@ -105,21 +107,63 @@ namespace BasicApp.UI.Controls
 
             SKRect rect = new SKRect(CANVAS_SIZE, (info.Height - (info.Width - CANVAS_SIZE)) / 2, info.Width - CANVAS_SIZE, info.Width - CANVAS_SIZE + ((info.Height - (info.Width - CANVAS_SIZE)) / 2));
 
-            canvas.DrawOval(rect, outlinePaint);
 
-            using (SKPath path = new SKPath())
+            int size = 360 / 4;
+
+            SKPaint arcPaint;
+
+            if (_endAngle <= 180)
+                arcPaint = arcPaintGreen;
+            else if (_endAngle >= 315)
+                arcPaint = arcPaintRed;
+            else
+                arcPaint = arcPaintYellow;
+
+
+            arcPaint.StrokeCap = SKStrokeCap.Round;
+            //canvas.DrawRect(rect, outlinePaint);
+
+            if (_endAngle <= size)
             {
-                path.AddArc(rect, START_ANGLE, _endAngle);
-                SKPaint arcPaint;
-                if (_endAngle <= 180)
-                    arcPaint = arcPaintGreen;
-                else if (_endAngle >= 315)
-                    arcPaint = arcPaintRed;
-                else
-                    arcPaint = arcPaintYellow;
+                canvas.DrawLine(rect.Left, rect.Top, (rect.Right * _endAngle) / size, rect.Top, arcPaint);
 
-                canvas.DrawPath(path, arcPaint);
             }
+            else if (_endAngle <= size * 2 && _endAngle > size)
+            {
+                canvas.DrawLine(rect.Left, rect.Top, rect.Right, rect.Top, arcPaint);
+                canvas.DrawLine(rect.Right, rect.Top, rect.Right, (rect.Bottom * (_endAngle % size)) / size, arcPaint);
+            }
+            else if (_endAngle <= size * 3 && _endAngle > size * 2)
+            {
+                canvas.DrawLine(rect.Left, rect.Top, rect.Right, rect.Top, arcPaint);
+                canvas.DrawLine(rect.Right, rect.Top, rect.Right, rect.Bottom, arcPaint);
+                canvas.DrawLine(rect.Right, rect.Bottom, rect.Right - (rect.Right * (_endAngle % size)) / size, rect.Bottom, arcPaint);
+            }
+            else
+            {
+                canvas.DrawLine(rect.Left, rect.Top, rect.Right, rect.Top, arcPaint);
+                canvas.DrawLine(rect.Right, rect.Top, rect.Right, rect.Bottom, arcPaint);
+                canvas.DrawLine(rect.Right, rect.Bottom, rect.Left, rect.Bottom, arcPaint);
+                canvas.DrawLine(rect.Left, rect.Bottom, rect.Left, rect.Bottom - (rect.Bottom * (_endAngle % size)) / size, arcPaint);
+            }
+
+
+            //canvas.DrawOval(rect, outlinePaint);
+
+            //using (SKPath path = new SKPath())
+            //{
+            //    path.AddRect(rect, SKPathDirection.Clockwise);
+            //    path.AddArc(rect, START_ANGLE, _endAngle);
+            //    SKPaint arcPaint;
+            //    if (_endAngle <= 180)
+            //        arcPaint = arcPaintGreen;
+            //    else if (_endAngle >= 315)
+            //        arcPaint = arcPaintRed;
+            //    else
+            //        arcPaint = arcPaintYellow;
+
+            //    canvas.DrawPath(path, arcPaint);
+            //}
         }
     }
 }
