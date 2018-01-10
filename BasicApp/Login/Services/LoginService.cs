@@ -40,6 +40,8 @@ namespace BasicApp.Login.Services
             {
                 if (!_connectivityService.IsConnected()) throw new NoInternetException();
 
+                login.Email = login.Email.Trim();
+
                 var user = await _api.LogUserAsync(login);
                 _uiServices.HideLoading();
                 if (user == null)

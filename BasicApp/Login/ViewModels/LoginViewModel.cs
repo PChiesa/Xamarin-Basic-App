@@ -34,7 +34,6 @@ namespace BasicApp.Login.ViewModels
             _sessionManager = sessionManager;
             _pageDialogService = pageDialogService;
 
-            Title = "Hello";
             LoginCommand = new DelegateCommand(LoginCommandAction);
             NavigateToRecoverCommand = new DelegateCommand(async () => await navigationService.NavigateAsync("Recover"));
             NavigateToRegisterCommand = new DelegateCommand(async () => await navigationService.NavigateAsync("Register"));
@@ -43,6 +42,12 @@ namespace BasicApp.Login.ViewModels
 
         private async void LoginCommandAction()
         {
+            if (string.IsNullOrEmpty(Login.Email) || string.IsNullOrEmpty(Login.Password))
+            {
+                await _pageDialogService.DisplayAlertAsync("Atenção", "Email ou senha não preenchidos", "OK");
+                return;
+            }
+
             var user = await _loginService.LogUserAsync(Login);
             if (user != null)
                 await navigationService.NavigateAsync("RootMasterDetail/RootNavigation/EventList");

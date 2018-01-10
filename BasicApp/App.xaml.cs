@@ -28,12 +28,15 @@ namespace BasicApp
 
         public App(IPlatformInitializer initializer = null) : base(initializer)
         {
-            Resources = new ResourceDictionary();
-            ApplyCustomStyles();
+
         }
 
         protected override async void OnInitialized()
         {
+            Resources = new ResourceDictionary();
+            ApplyGlobalStyles();
+            ApplyGlobalConverters();
+
             try
             {
                 if (Container.Resolve<ISessionManager>().GetUserId() > 0)
@@ -70,10 +73,11 @@ namespace BasicApp
 
         private void ApplyGlobalConverters()
         {
-            //Resources.Add("lengthToBoolConverter", new LengthToBoolConverter());
+            Resources.Add("lengthToBoolConverter", new LengthToBoolConverter());
+            Resources.Add("reverseBoolConverter", new ReverseBoolConverter());
         }
 
-        private void ApplyCustomStyles()
+        private void ApplyGlobalStyles()
         {
 
 
@@ -127,11 +131,27 @@ namespace BasicApp
                 }
             };
 
+            var buttonPrimary = new Style(typeof(Button))
+            {
+                Setters = {
+                    new Setter { Property = Button.BackgroundColorProperty, Value = Color.FromHex("79AB4E")}
+                }
+            };
+
+            var entryStyle = new Style(typeof(Entry))
+            {
+                Setters = {
+                    new Setter { Property = Entry.FontFamilyProperty, Value = montSerratRegular}
+                }
+            };
+
             Resources.Add(buttonStyle);
             Resources.Add(labelStyle);
+            Resources.Add(entryStyle);
             Resources.Add("labelFontBold", labelFontBold);
             Resources.Add("labelFontMedium", labelFontMedium);
             Resources.Add("labelFontRez", labelFontRez);
+            Resources.Add("buttonPrimary", buttonPrimary);
         }
     }
 }

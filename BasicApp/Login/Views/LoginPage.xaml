@@ -2,6 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" xmlns:localControls="clr-namespace:BasicApp.UI.Controls" xmlns:localBehaviors="clr-namespace:BasicApp.UI.Behaviors" x:Class="BasicApp.Login.Views.LoginPage">
     <Grid>
         <StackLayout Padding="20" VerticalOptions="FillAndExpand">
+
+            <Image Source="logowhite.png" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" WidthRequest="225" />
+
+            <BoxView HorizontalOptions="Fill" Margin="0,20,0,30" HeightRequest="1" BackgroundColor="#94BD4D"/>
+
             <StackLayout VerticalOptions="StartAndExpand">
                 <!--<StackLayout Margin="0, 0, 0, 10">
                     <Label Text="CPF" />
@@ -14,16 +19,20 @@
                 <StackLayout Margin="0, 0, 0, 10">
                     <Label Text="E-mail" />
                     <Entry Text="{Binding Login.Email}">
-                        <Entry.Behaviors>
+                        <!--<Entry.Behaviors>
                             <localBehaviors:EmailEntryBehavior />
-                        </Entry.Behaviors>
+                        </Entry.Behaviors>-->
                     </Entry>
                 </StackLayout>
                 <StackLayout Margin="0, 0, 0, 10">
                     <Label Text="Senha" />
-                    <Entry IsPassword="true" Text="{Binding Login.Password}" />
+                    <Entry IsPassword="{Binding Mode=OneWay, Converter={StaticResource reverseBoolConverter}, Source={x:Reference showPassword}, Path=IsToggled}" Text="{Binding Login.Password}" />
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                        <Label Text="Mostrar senha" FontSize="Micro" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                        <Switch x:Name="showPassword" IsToggled="False" VerticalOptions="Center" HorizontalOptions="End"/>
+                    </StackLayout>
                 </StackLayout>
-                <Button Text="Login" Command="{Binding LoginCommand}" />
+                <Button Text="Login" Style="{StaticResource buttonPrimary}" Command="{Binding LoginCommand}" />
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                 <Button Text="Esqueci a senha" HorizontalOptions="StartAndExpand" Command="{Binding NavigateToRecoverCommand}" />

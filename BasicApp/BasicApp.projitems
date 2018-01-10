@@ -66,6 +66,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Connectivity\ConnectivityService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Policies\Exceptions\NoInternetException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Converters\LengthToBoolConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Converters\ReverseBoolConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\RootMasterDetailPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
