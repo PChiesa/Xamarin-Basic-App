@@ -2,18 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" xmlns:localControls="clr-namespace:BasicApp.UI.Controls" xmlns:localBehaviors="clr-namespace:BasicApp.UI.Behaviors" x:Class="BasicApp.Login.Views.RecoverPage" Title="Esqueci a Senha" NavigationPage.HasBackButton="True" NavigationPage.HasNavigationBar="True">
     <Grid>
         <StackLayout Padding="20">
-            <StackLayout VerticalOptions="StartAndExpand">
+            <Image Source="logowhite.png" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" WidthRequest="225" />
+            <BoxView HorizontalOptions="Fill" Margin="0,20,0,30" HeightRequest="1" BackgroundColor="#94BD4D"/>
+
+            <StackLayout VerticalOptions="CenterAndExpand">
                 <!--<StackLayout Margin="0, 0, 0, 10">
                 <Label Text="CPF" />
                 <Entry Text="{Binding User.Cpf}" />
             </StackLayout>-->
-                <StackLayout Margin="0, 0, 0, 10">
+                <!--<StackLayout Margin="0, 0, 0, 10">
                     <Label Text="E-mail" />
                     <Entry Text="{Binding Email}" />
                 </StackLayout>
-                <Button Text="Recuperar Senha" Command="{Binding RecoverCommand}" Style="{StaticResource buttonPrimary}" />
+                <Button Text="Recuperar Senha" Command="{Binding RecoverCommand}" Style="{StaticResource buttonPrimary}" />-->
+                <Label FontSize="Large" HorizontalTextAlignment="Center" Text="Funcionalidade ainda não disponível"/>
+                <Label FontSize="Large" HorizontalTextAlignment="Center" Text="Caso precise recuperar sua senha, acesse o site voucherseguro.com"/>
             </StackLayout>
             <!--<Button Text="Voltar" Command="{Binding GoBackCommand}" />-->
+            <Button Text="Acesse o site" Command="{Binding GoToSiteCommand}" Style="{StaticResource buttonPrimary}"/>
         </StackLayout>
         <localControls:LoadingIndicatorView IsVisible="{Binding IsLoading}" IsLoading="{Binding IsLoading}" LoadingMessage="{Binding LoadingMessage}" />
     </Grid>
