@@ -8,6 +8,11 @@ namespace BasicApp.Login.Views
         {
             InitializeComponent();
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return false;
+        }
     }
 }
 

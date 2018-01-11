@@ -127,7 +127,8 @@ namespace BasicApp
             var labelStyle = new Style(typeof(Label))
             {
                 Setters = {
-                    new Setter { Property = Button.FontFamilyProperty, Value = montSerratRegular}
+                    new Setter { Property = Button.FontFamilyProperty, Value = montSerratRegular},
+                    new Setter { Property = Label.TextColorProperty, Value = Color.White}
                 }
             };
 

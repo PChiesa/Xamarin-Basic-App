@@ -9,21 +9,22 @@
         <ContentPage Title="Menu">
             <StackLayout Padding="20">
                 <StackLayout VerticalOptions="Start">
-                    <Image Aspect="AspectFill" Source="logowhite.png"/>
+                    <Image Source="logowhite.png" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" WidthRequest="225" />
+
+                    <BoxView HorizontalOptions="Fill" Margin="0,10,0,10" HeightRequest="1" BackgroundColor="#94BD4D"/>
                 </StackLayout>
-                <BoxView Margin="0,10,0,10" BackgroundColor="#79AB4E" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
                 <StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Nome:"></Label>
-                        <Label Text="{Binding User.Name}"></Label>
+                        <Label Style="{StaticResource labelFontMedium}" Text="{Binding User.Name}"></Label>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Cpf:"></Label>
-                        <Label Text="{Binding User.Cpf}"></Label>
+                        <Label Style="{StaticResource labelFontMedium}" Text="{Binding User.Cpf}"></Label>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="E-mail:"></Label>
-                        <Label Text="{Binding User.Email}"></Label>
+                        <Label Style="{StaticResource labelFontMedium}" Text="{Binding User.Email}"></Label>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout VerticalOptions="EndAndExpand">

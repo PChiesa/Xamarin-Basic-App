@@ -8,5 +8,10 @@ namespace BasicApp.UI
         {
             InitializeComponent();
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return false;
+        }
     }
 }
