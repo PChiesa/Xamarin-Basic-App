@@ -2,17 +2,41 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms" x:Class="BasicApp.UI.Controls.VoucherView">
     <ContentView.Content>
         <AbsoluteLayout>
-            <Image Source="{Binding QrCode}" AbsoluteLayout.LayoutBounds=".5,.1,.4,.4" AbsoluteLayout.LayoutFlags="All" />
-            <skia:SKCanvasView x:Name="canvasView" AbsoluteLayout.LayoutBounds=".5,.1,.5,.5" AbsoluteLayout.LayoutFlags="All" />
+            <StackLayout Padding="0,10,0,0"  AbsoluteLayout.LayoutBounds="0,0,1,.5" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsVoucherActive}">
+                <!--ACTIVE VOUCHER-->
+                <RelativeLayout HorizontalOptions="CenterAndExpand">
+                    <Image x:Name="qrCode" Source="{Binding QrCode}"  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, 
+                                        Property=Height,
+                                        Factor=0.75}"
+                           RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, 
+                                        Property=Height,
+                                        Factor=0.75}"/>
+                    <skia:SKCanvasView x:Name="canvasView" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, 
+                                        Property=Height,
+                                        Factor=0.75}"
+                      RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,ElementName=qrCode, 
+                                        Property=Height,
+                                        Factor=.9}"/>
+                </RelativeLayout>
+            </StackLayout>
+
+            <StackLayout Padding="20,0,20,20" AbsoluteLayout.LayoutBounds="0,1,1,.5" AbsoluteLayout.LayoutFlags="All" VerticalOptions="Center">
+
+                <StackLayout>
+                    <Label HorizontalOptions="CenterAndExpand" FontSize="Large" Style="{StaticResource labelFontMedium}" Text="{Binding Description1}" />
+                    <Label HorizontalOptions="CenterAndExpand" FontSize="Large" Style="{StaticResource labelFontMedium}" Text="{Binding Description2}" />
+                    <Label HorizontalOptions="CenterAndExpand" FontSize="Large" Style="{StaticResource labelFontMedium}" Text="{Binding Description3}" />
+
+                    <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                        <Label FontSize="Medium" Text="Utilizador:"/>
+                        <Label FontSize="Medium" Style="{StaticResource labelFontMedium}" Text="{Binding ClientNameOwner}" />
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                        <Label FontSize="Medium" Text="CPF:"/>
+                        <Label FontSize="Medium" Style="{StaticResource labelFontMedium}" Text="{Binding ClientCPFOwner}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
         </AbsoluteLayout>
-        <!--<StackLayout>
-                <Label Text="{Binding Description1}" />
-                <Label Text="{Binding Description2}" />
-                <Label Text="{Binding Description3}" />
-                <Label Text="Ativo" IsVisible="{Binding IsVoucherActive}" />
-                <Label Text="Ainda vai ativar" IsVisible="{Binding IsVoucherPendingActivation}" />
-                <Label Text="Expirado" IsVisible="{Binding IsVoucherExpired}" />
-                <Label Text="Usado" IsVisible="{Binding IsVoucherUsed}" />
-            </StackLayout>-->
     </ContentView.Content>
 </ContentView>

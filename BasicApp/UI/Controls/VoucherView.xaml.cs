@@ -105,7 +105,9 @@ namespace BasicApp.UI.Controls
             SKCanvas canvas = surface.Canvas;
             canvas.Clear();
 
-            SKRect rect = new SKRect(CANVAS_SIZE, (info.Height - (info.Width - CANVAS_SIZE)) / 2, info.Width - CANVAS_SIZE, info.Width - CANVAS_SIZE + ((info.Height - (info.Width - CANVAS_SIZE)) / 2));
+            //SKRect rect = new SKRect(CANVAS_SIZE, (info.Height - (info.Width - CANVAS_SIZE)) / 2, info.Width - CANVAS_SIZE, info.Width - CANVAS_SIZE + ((info.Height - (info.Width - CANVAS_SIZE)) / 2));
+
+            SKRect rect = new SKRect(CANVAS_SIZE/2, CANVAS_SIZE, info.Width - CANVAS_SIZE/2, info.Height - CANVAS_SIZE);
 
             SKPaint arcPaint;
 

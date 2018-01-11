@@ -56,6 +56,15 @@ namespace BasicApp.Voucher.Models
         [Ignore]
         public bool IsVoucherCancelled => CurrentStatus == VoucherStatus.Canceled;
 
+        [Ignore]
+        public string VoucherPendingActivationText => "teste";
+
+        [Ignore]
+        public string VoucherExpiredText => "teste";
+
+        [Ignore]
+        public string VoucherUsedText => "teste";
+
         private ImageSource _qrcode;
 
         [Ignore]
