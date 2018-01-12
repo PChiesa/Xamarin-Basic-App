@@ -119,8 +119,8 @@ namespace BasicApp.UI.Controls
                 arcPaint = arcPaintYellow;
 
 
-            outlinePaint.StrokeCap = SKStrokeCap.Round;
-            arcPaint.StrokeCap = SKStrokeCap.Round;
+            //outlinePaint.StrokeCap = SKStrokeCap.Round;
+            //arcPaint.StrokeCap = SKStrokeCap.Round;
 
 
             canvas.DrawLine(rect.Left, rect.Bottom, rect.Right, rect.Bottom, outlinePaint);

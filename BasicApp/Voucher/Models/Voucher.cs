@@ -51,19 +51,28 @@ namespace BasicApp.Voucher.Models
         public bool IsVoucherUsed => CurrentStatus == VoucherStatus.Used;
 
         [Ignore]
-        public bool IsVoucherExpired => ExpirationDate <= DateTime.Now;
+        public bool IsVoucherExpired => ExpirationDate <= DateTime.Now && !IsVoucherUsed && !IsVoucherExchanged && !IsVoucherCancelled;
 
         [Ignore]
         public bool IsVoucherCancelled => CurrentStatus == VoucherStatus.Canceled;
 
         [Ignore]
-        public string VoucherPendingActivationText => "teste";
+        public bool IsVoucherExchanged => CurrentStatus == VoucherStatus.Exchanged;
 
         [Ignore]
-        public string VoucherExpiredText => "teste";
+        public string VoucherPendingActivationTextDate => $"{ActivationDate.ToString("dd/MM/yyyy")} às {ActivationDate.ToString("H:mm")}";
 
         [Ignore]
-        public string VoucherUsedText => "teste";
+        public string VoucherExpiredTextDate => $"{ExpirationDate.ToString("dd/MM/yyyy")} às {ExpirationDate.ToString("H:mm")}";
+
+        [Ignore]
+        public string VoucherUsedTextDate => $"{EntryDate.ToString("dd/MM/yyyy")} às {EntryDate.ToString("H:mm")}";
+
+        [Ignore]
+        public string VoucherCancelledTextDate => $"{EntryDate.ToString("dd/MM/yyyy")} às {EntryDate.ToString("H:mm")}";
+
+        [Ignore]
+        public string VoucherExchangedTextDate => $"{EntryDate.ToString("dd/MM/yyyy")} às {EntryDate.ToString("H:mm")}";
 
         private ImageSource _qrcode;
 
