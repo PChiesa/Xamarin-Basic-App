@@ -26,6 +26,9 @@ namespace BasicApp.Droid
 
             base.OnCreate(bundle);
 
+            /* Prevent screenshots */
+            Window.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             LoadApplication(new App(new AndroidInitializer()));
