@@ -125,6 +125,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)UI\PubSubEvents\QrCodeRefreshEvent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\PubSubEvents\VoucherEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\PubSubEvents\LogoutEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Voucher\Services\VoucherServiceMock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Controls\CarouselViewIndicator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Controls\SquareBoxView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Login\" />

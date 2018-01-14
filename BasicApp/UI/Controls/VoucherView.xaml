@@ -1,83 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms" x:Class="BasicApp.UI.Controls.VoucherView">
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms" xmlns:localcontrols="clr-namespace:BasicApp.UI.Controls" x:Class="BasicApp.UI.Controls.VoucherView">
     <ContentView.Content>
         <AbsoluteLayout Padding="0" Margin="0">
-            <StackLayout BackgroundColor="White" Padding="0,20,0,0"  AbsoluteLayout.LayoutBounds="0,0,1,.6" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsVoucherActive}">
+            <StackLayout BackgroundColor="White" Padding="0,10,0,10" AbsoluteLayout.LayoutBounds="0,0,1,.6" AbsoluteLayout.LayoutFlags="All" IsVisible="{Binding IsVoucherActive}">
                 <!--ACTIVE VOUCHER-->
-                <RelativeLayout HorizontalOptions="CenterAndExpand">
-                    <Image x:Name="qrCode" Source="{Binding QrCode}"  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, 
-                                        Property=Height,
-                                        Factor=0.75}"
-                           RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, 
-                                        Property=Height,
-                                        Factor=0.75}"/>
-                    <skia:SKCanvasView x:Name="canvasView" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, 
-                                        Property=Height,
-                                        Factor=0.75}"
-                      RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,ElementName=qrCode, 
-                                        Property=Height,
-                                        Factor=.9}"/>
-                </RelativeLayout>
+                <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <localcontrols:SquareContentView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".5,.5,.5,1">
+                        <Image x:Name="qrCode" Source="{Binding QrCode}" Aspect="Fill" />
+                    </localcontrols:SquareContentView>
+                    <skia:SKCanvasView x:Name="canvasView" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds=".5,1,.5,.5" />
+                </AbsoluteLayout>
             </StackLayout>
-
             <StackLayout IsVisible="{Binding IsVoucherPendingActivation}" BackgroundColor="Black" AbsoluteLayout.LayoutBounds="0,0,1,.6" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout VerticalOptions="CenterAndExpand">
                     <Image Source="logowhite.png" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" WidthRequest="180" />
-                    <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Text="Aguardando liberação"/>
+                    <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Text="Aguardando liberação" />
                     <StackLayout Spacing="0">
-                        <Label HorizontalOptions="CenterAndExpand" Text="O acesso será liberado em"/>
-                        <Label FontSize="Medium" Style="{StaticResource labelFontBold}" HorizontalOptions="CenterAndExpand" Text="{Binding VoucherPendingActivationTextDate}"/>
+                        <Label HorizontalOptions="CenterAndExpand" Text="O acesso será liberado em" />
+                        <Label FontSize="Medium" Style="{StaticResource labelFontBold}" HorizontalOptions="CenterAndExpand" Text="{Binding VoucherPendingActivationTextDate}" />
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
-
             <StackLayout IsVisible="{Binding IsVoucherExpired}" BackgroundColor="#55FF0000" AbsoluteLayout.LayoutBounds="0,0,1,.6" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout VerticalOptions="CenterAndExpand">
                     <Image Source="logowhite.png" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" WidthRequest="180" />
-                    <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Text="Expirado"/>
+                    <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Text="Expirado" />
                     <StackLayout Spacing="0">
-                        <Label HorizontalOptions="CenterAndExpand" Text="O acesso foi expirado em"/>
-                        <Label FontSize="Medium" Style="{StaticResource labelFontBold}" HorizontalOptions="CenterAndExpand" Text="{Binding VoucherExpiredTextDate}"/>
+                        <Label HorizontalOptions="CenterAndExpand" Text="O acesso foi expirado em" />
+                        <Label FontSize="Medium" Style="{StaticResource labelFontBold}" HorizontalOptions="CenterAndExpand" Text="{Binding VoucherExpiredTextDate}" />
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
-
             <StackLayout IsVisible="{Binding IsVoucherUsed}" BackgroundColor="#5500FF00" AbsoluteLayout.LayoutBounds="0,0,1,.6" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout VerticalOptions="CenterAndExpand">
                     <Image Source="logowhite.png" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" WidthRequest="180" />
-                    <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Text="Já utilizado"/>
+                    <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Text="Já utilizado" />
                     <StackLayout Spacing="0">
-                        <Label HorizontalOptions="CenterAndExpand" Text="O acesso foi utilizado em"/>
-                        <Label FontSize="Medium" Style="{StaticResource labelFontBold}" HorizontalOptions="CenterAndExpand" Text="{Binding VoucherUsedTextDate}"/>
-                        <Label FontSize="Medium" Style="{StaticResource labelFontBold}" HorizontalOptions="CenterAndExpand" Text="{Binding Gate}"/>
+                        <Label HorizontalOptions="CenterAndExpand" Text="O acesso foi utilizado em" />
+                        <Label FontSize="Medium" Style="{StaticResource labelFontBold}" HorizontalOptions="CenterAndExpand" Text="{Binding VoucherUsedTextDate}" />
+                        <Label FontSize="Medium" Style="{StaticResource labelFontBold}" HorizontalOptions="CenterAndExpand" Text="{Binding Gate}" />
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
-
             <StackLayout IsVisible="{Binding IsVoucherCancelled}" BackgroundColor="#55FF0000" AbsoluteLayout.LayoutBounds="0,0,1,.6" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout VerticalOptions="CenterAndExpand">
                     <Image Source="logowhite.png" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" WidthRequest="180" />
-                    <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Text="Cancelado"/>
+                    <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Text="Cancelado" />
                     <StackLayout Spacing="0">
-                        <Label HorizontalOptions="CenterAndExpand" Text="O acesso foi cancelado em"/>
-                        <Label FontSize="Medium" Style="{StaticResource labelFontBold}" HorizontalOptions="CenterAndExpand" Text="{Binding VoucherCancelledTextDate}"/>
+                        <Label HorizontalOptions="CenterAndExpand" Text="O acesso foi cancelado em" />
+                        <Label FontSize="Medium" Style="{StaticResource labelFontBold}" HorizontalOptions="CenterAndExpand" Text="{Binding VoucherCancelledTextDate}" />
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
-
             <StackLayout IsVisible="{Binding IsVoucherExchanged}" BackgroundColor="#330000FF" AbsoluteLayout.LayoutBounds="0,0,1,.6" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout VerticalOptions="CenterAndExpand">
                     <Image Source="logowhite.png" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" WidthRequest="180" />
-                    <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Text="Trocado"/>
+                    <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Text="Trocado" />
                     <StackLayout Spacing="0">
-                        <Label HorizontalOptions="CenterAndExpand" Text="O acesso foi trocado em"/>
-                        <Label FontSize="Medium" Style="{StaticResource labelFontBold}" HorizontalOptions="CenterAndExpand" Text="{Binding VoucherExchangedTextDate}"/>
+                        <Label HorizontalOptions="CenterAndExpand" Text="O acesso foi trocado em" />
+                        <Label FontSize="Medium" Style="{StaticResource labelFontBold}" HorizontalOptions="CenterAndExpand" Text="{Binding VoucherExchangedTextDate}" />
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
-
             <StackLayout Padding="20,0,20,20" AbsoluteLayout.LayoutBounds="0,1,1,.4" AbsoluteLayout.LayoutFlags="All" VerticalOptions="Center">
-
                 <StackLayout VerticalOptions="Center">
                     <StackLayout Spacing="-6" VerticalOptions="Center">
                         <Label FontSize="Large" Style="{StaticResource labelFontMedium}" Text="{Binding Description1}" />
@@ -88,11 +73,11 @@
                     </StackLayout>
                     <StackLayout Spacing="-6" VerticalOptions="Center">
                         <StackLayout Orientation="Horizontal">
-                            <Label FontSize="Medium" Text="Utilizador:"/>
+                            <Label FontSize="Medium" Text="Utilizador:" />
                             <Label FontSize="Medium" Style="{StaticResource labelFontMedium}" Text="{Binding ClientNameOwner}" />
                         </StackLayout>
                         <StackLayout Padding="0" Margin="0" Orientation="Horizontal">
-                            <Label FontSize="Medium" Text="CPF:"/>
+                            <Label FontSize="Medium" Text="CPF:" />
                             <Label FontSize="Medium" Style="{StaticResource labelFontMedium}" Text="{Binding ClientCPFOwner}" />
                         </StackLayout>
                     </StackLayout>

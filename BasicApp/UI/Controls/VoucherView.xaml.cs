@@ -74,7 +74,7 @@ namespace BasicApp.UI.Controls
             SKPaint outlinePaint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
-                StrokeWidth = STROKE_WIDTH + 3,
+                StrokeWidth = STROKE_WIDTH + 5,
                 Color = SKColors.Black
             };
 
@@ -82,21 +82,21 @@ namespace BasicApp.UI.Controls
             {
                 Style = SKPaintStyle.Stroke,
                 StrokeWidth = STROKE_WIDTH,
-                Color = SKColors.Green
+                Color = new SKColor(148, 220, 77)
             };
 
             SKPaint arcPaintYellow = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
                 StrokeWidth = STROKE_WIDTH,
-                Color = SKColors.Yellow
+                Color = new SKColor(255, 241, 91)
             };
 
             SKPaint arcPaintRed = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
                 StrokeWidth = STROKE_WIDTH,
-                Color = SKColors.Red
+                Color = new SKColor(255, 91, 91)
             };
 
 
@@ -107,7 +107,7 @@ namespace BasicApp.UI.Controls
 
             //SKRect rect = new SKRect(CANVAS_SIZE, (info.Height - (info.Width - CANVAS_SIZE)) / 2, info.Width - CANVAS_SIZE, info.Width - CANVAS_SIZE + ((info.Height - (info.Width - CANVAS_SIZE)) / 2));
 
-            SKRect rect = new SKRect(CANVAS_SIZE/2, CANVAS_SIZE, info.Width - CANVAS_SIZE/2, info.Height - CANVAS_SIZE);
+            SKRect rect = new SKRect(CANVAS_SIZE / 2, CANVAS_SIZE, info.Width - CANVAS_SIZE / 2, info.Height - CANVAS_SIZE);
 
             SKPaint arcPaint;
 
@@ -125,6 +125,8 @@ namespace BasicApp.UI.Controls
 
             canvas.DrawLine(rect.Left, rect.Bottom, rect.Right, rect.Bottom, outlinePaint);
 
+            rect.Left += 1;
+            rect.Right -= 1;
             canvas.DrawLine(rect.Left, rect.Bottom, rect.Left + (_endAngle * rect.Width) / 100, rect.Bottom, arcPaint);
 
             //canvas.DrawRect(rect, outlinePaint);

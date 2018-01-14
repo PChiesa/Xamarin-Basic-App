@@ -65,17 +65,17 @@ namespace BasicApp.Voucher.ViewModels
         }
 
 
-        public async override void OnNavigatingTo(NavigationParameters parameters)
+        public override void OnNavigatingTo(NavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
             Event = parameters.GetValue<Models.Event>("Event");
 
             //TODO: Move this logic to somewhere else
-            Event.VoucherList = await _voucherRepository.GetListByPredicateAsync(voucher => voucher.EventId == Event.Id);
-            if (!Event.VoucherList.Any())
-                GetEventVoucherListCommandAction();
-            else
-                RaisePropertyChanged("Event");
+            //Event.VoucherList = await _voucherRepository.GetListByPredicateAsync(voucher => voucher.EventId == Event.Id);
+            //if (!Event.VoucherList.Any())
+            //    GetEventVoucherListCommandAction();
+            //else
+                //RaisePropertyChanged("Event");
 
             _eventAggregator.GetEvent<QrCodeRefreshEvent>().Subscribe(RefreshQrCode);
         }

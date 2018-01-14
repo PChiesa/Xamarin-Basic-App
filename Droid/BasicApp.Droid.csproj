@@ -28,10 +28,6 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -240,6 +236,14 @@
     <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable\unselectedcircle.png" />
+    <AndroidResource Include="Resources\drawable\selectedcircle.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\selectedcircle.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\unselectedcircle.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\selectedcircle.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\unselectedcircle.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\selectedcircle.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\unselectedcircle.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FodyWeavers.xml" />

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage Title="VoucherSeguro®" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" xmlns:localControls="clr-namespace:BasicApp.UI.Controls" xmlns:carousel="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" x:Class="BasicApp.Voucher.Views.EventVoucherListPage" BackgroundImage="{Binding Event.Image1}">
-    <ContentPage.ToolbarItems>
+<ContentPage Title="VoucherSeguro®" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" prism:ViewModelLocator.AutowireViewModel="True" xmlns:localControls="clr-namespace:BasicApp.UI.Controls" xmlns:carousel="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView" x:Class="BasicApp.Voucher.Views.EventVoucherListPage">
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem Name="RefreshEvents" Order="Primary" Text="Recarregar" Priority="0" Command="{Binding GetEventVoucherListCommand}" />
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*">
@@ -10,22 +10,31 @@
             <RowDefinition Height="3*">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <StackLayout Grid.Row="0" Margin="0" Padding="0" Spacing="0">
-            <Grid BackgroundColor="Blue">
-                <Image Aspect="Fill" Source="{Binding Event.Image1}" />
+        <StackLayout VerticalOptions="FillAndExpand" Grid.Row="0" Margin="0" Padding="0" Spacing="0">
+            <Grid>
+                <Image Aspect="Fill" Source="{Binding Event.Image2}" />
+                <AbsoluteLayout>
+                    <BoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="#5000">
+                    </BoxView>
+                </AbsoluteLayout>
                 <StackLayout VerticalOptions="CenterAndExpand">
                     <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Style="{StaticResource labelFontMedium}" Text="{Binding Event.Name}" />
                     <Label HorizontalOptions="CenterAndExpand" Style="{StaticResource labelFontMedium}" Text="{Binding Event.GetEventDate}" />
                 </StackLayout>
             </Grid>
         </StackLayout>
-        <carousel:CarouselView ItemsSource="{Binding Event.VoucherList}" Margin="0" Grid.Row="1">
+        <RelativeLayout Grid.Row="1" VerticalOptions="End">
+            <StackLayout RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.93}">
+                <localControls:CarouselViewIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IndicatorHeight="10" IndicatorWidth="10" UnselectedIndicator="unselectedcircle.png" SelectedIndicator="selectedcircle.png" Position="{Binding Source={x:Reference carousel}, Path=Position}" ItemsSource="{Binding Event.VoucherList}" />
+            </StackLayout>
+        </RelativeLayout>
+        <carousel:CarouselView x:Name="carousel" ItemsSource="{Binding Event.VoucherList}" Margin="0" Grid.Row="1">
             <carousel:CarouselView.ItemTemplate>
                 <DataTemplate>
                     <localControls:VoucherView />
                 </DataTemplate>
             </carousel:CarouselView.ItemTemplate>
         </carousel:CarouselView>
-        <localControls:LoadingIndicatorView Grid.Row="0" Grid.RowSpan="2" IsVisible="{Binding IsLoading}" IsLoading="{Binding IsLoading}" LoadingMessage="{Binding LoadingMessage}" />
+        <!--<localControls:LoadingIndicatorView Grid.Row="0" Grid.RowSpan="2" IsVisible="{Binding IsLoading}" IsLoading="{Binding IsLoading}" LoadingMessage="{Binding LoadingMessage}" />-->
     </Grid>
 </ContentPage>
