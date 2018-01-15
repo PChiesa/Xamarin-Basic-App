@@ -21,7 +21,7 @@ namespace BasicApp.Voucher.Services
                     Store = new Store{Name = "Store"},
                     Image1 = "http://via.placeholder.com/500x500",
                     Image2 = "http://via.placeholder.com/1000x500",
-                    VoucherList = new List<Models.Voucher>{
+                    Vouchers = new List<Models.Voucher>{
                         new Models.Voucher {
                             ClientCPFOwner = "123.123.123-12",
                             ClientNameOwner = "Teste",
@@ -180,6 +180,11 @@ namespace BasicApp.Voucher.Services
                 //    CurrentStatus = Enums.VoucherStatus.Used
                 //}
             };
+        }
+
+        public Task<IEnumerable<VoucherQuickUpdate>> RefreshVouchers(IEnumerable<int> voucherIds)
+        {
+            throw new NotImplementedException();
         }
     }
 }

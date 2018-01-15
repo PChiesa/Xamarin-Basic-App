@@ -35,9 +35,6 @@ namespace BasicApp.UI.Controls
             {
                 _voucher = this.BindingContext as Voucher.Models.Voucher;
 
-                //if (!_voucher.IsVoucherActive)
-                //    return;
-
                 _eventAggregator
                         .GetEvent<QrCodeRefreshEvent>()
                     .Publish(new VoucherEventArgs(_voucher));

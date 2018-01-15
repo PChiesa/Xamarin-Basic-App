@@ -77,7 +77,7 @@ namespace BasicApp.Database
 
         public List<T> GetListByPredicate(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _connection.Table<T>().Where(predicate).ToList();
         }
 
         public async Task<List<T>> GetListByPredicateAsync(Expression<Func<T, bool>> predicate)
@@ -110,9 +110,9 @@ namespace BasicApp.Database
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            await _asyncConnection.UpdateAsync(entity);
         }
 
         public async Task AddAllAsync(IEnumerable<T> entities)
@@ -142,6 +142,11 @@ namespace BasicApp.Database
             {
                 _connection.CreateTable<T>();
             }
+        }
+
+        public async Task UpdateAllAsync(IEnumerable<T> entities)
+        {
+            await _asyncConnection.UpdateAllAsync(entities);
         }
     }
 }

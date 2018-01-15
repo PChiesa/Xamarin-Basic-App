@@ -30,6 +30,6 @@ namespace BasicApp.Voucher.Models
         public Store Store { get; set; }
 
         [Ignore]
-        public IEnumerable<Voucher> VoucherList { get; set; }
+        public IEnumerable<Voucher> Vouchers { get; set; }
     }
 }

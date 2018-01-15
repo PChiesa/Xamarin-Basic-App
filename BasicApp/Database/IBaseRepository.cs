@@ -29,5 +29,6 @@ namespace BasicApp.Database
         Task AddAsync(T entity);
         Task RemoveAsync(T entity);
         Task UpdateAsync(T entity);
+        Task UpdateAllAsync(IEnumerable<T> entities);
     }
 }

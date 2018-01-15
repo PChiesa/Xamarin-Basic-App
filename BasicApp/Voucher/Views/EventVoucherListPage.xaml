@@ -25,10 +25,10 @@
         </StackLayout>
         <RelativeLayout Grid.Row="1" VerticalOptions="End">
             <StackLayout RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=0.93}">
-                <localControls:CarouselViewIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IndicatorHeight="10" IndicatorWidth="10" UnselectedIndicator="unselectedcircle.png" SelectedIndicator="selectedcircle.png" Position="{Binding Source={x:Reference carousel}, Path=Position}" ItemsSource="{Binding Event.VoucherList}" />
+                <localControls:CarouselViewIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IndicatorHeight="10" IndicatorWidth="10" UnselectedIndicator="unselectedcircle.png" SelectedIndicator="selectedcircle.png" Position="{Binding Source={x:Reference carousel}, Path=Position}" ItemsSource="{Binding Event.Vouchers}" />
             </StackLayout>
         </RelativeLayout>
-        <carousel:CarouselView x:Name="carousel" ItemsSource="{Binding Event.VoucherList}" Margin="0" Grid.Row="1">
+        <carousel:CarouselView x:Name="carousel" ItemsSource="{Binding Event.Vouchers}" Margin="0" Grid.Row="1">
             <carousel:CarouselView.ItemTemplate>
                 <DataTemplate>
                     <localControls:VoucherView />

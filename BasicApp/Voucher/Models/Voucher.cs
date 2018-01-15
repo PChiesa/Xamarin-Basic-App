@@ -34,7 +34,7 @@ namespace BasicApp.Voucher.Models
         public string Description2 { get; set; }
         public string Description3 { get; set; }
         public string Gate { get; set; }
-        public DateTime EntryDate { get; set; }
+        public DateTime? EntryDate { get; set; }
         public string Token { get; set; }
         public DateTime ActivationDate { get; set; }
         public DateTime ExpirationDate { get; set; }
@@ -66,13 +66,13 @@ namespace BasicApp.Voucher.Models
         public string VoucherExpiredTextDate => $"{ExpirationDate.ToString("dd/MM/yyyy")} às {ExpirationDate.ToString("H:mm")}";
 
         [Ignore]
-        public string VoucherUsedTextDate => $"{EntryDate.ToString("dd/MM/yyyy")} às {EntryDate.ToString("H:mm")}";
+        public string VoucherUsedTextDate => $"{EntryDate?.ToString("dd/MM/yyyy")} às {EntryDate?.ToString("H:mm")}";
 
         [Ignore]
-        public string VoucherCancelledTextDate => $"{EntryDate.ToString("dd/MM/yyyy")} às {EntryDate.ToString("H:mm")}";
+        public string VoucherCancelledTextDate => $"{EntryDate?.ToString("dd/MM/yyyy")} às {EntryDate?.ToString("H:mm")}";
 
         [Ignore]
-        public string VoucherExchangedTextDate => $"{EntryDate.ToString("dd/MM/yyyy")} às {EntryDate.ToString("H:mm")}";
+        public string VoucherExchangedTextDate => $"{EntryDate?.ToString("dd/MM/yyyy")} às {EntryDate?.ToString("H:mm")}";
 
         private ImageSource _qrcode;
 
@@ -84,6 +84,16 @@ namespace BasicApp.Voucher.Models
                 _qrcode = value;
                 OnPropertyChanged("QrCode");
             }
+        }
+
+        public void CheckVoucherStatus()
+        {
+            OnPropertyChanged("IsVoucherPendingActivation");
+            OnPropertyChanged("IsVoucherActive");
+            OnPropertyChanged("IsVoucherUsed");
+            OnPropertyChanged("IsVoucherExpired");
+            OnPropertyChanged("IsVoucherCancelled");
+            OnPropertyChanged("IsVoucherExchanged");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -14,5 +14,8 @@ namespace BasicApp.Voucher.Services
 
         [Get("/Voucher/GetVouchers/{eventId}/{userId}")]
         Task<IEnumerable<Models.Voucher>> GetVouchersAsync(int userId, int eventId, [Header("UserToken")] string authorization);
+
+        [Post("/Voucher/RefreshVouchers")]
+        Task<IEnumerable<Models.VoucherQuickUpdate>> RefreshVouchersAsync(IEnumerable<int> voucherIds, [Header("UserToken")] string authorization);
     }
 }
