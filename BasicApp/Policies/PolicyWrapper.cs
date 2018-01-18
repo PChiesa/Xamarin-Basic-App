@@ -91,8 +91,11 @@ namespace BasicApp.Policies
                                                                      Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", api.Content, "Fechar"));
                                                                  else
                                                                      Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", "Recurso não encontrado, tente novamente", "Fechar"));
+                                                             }
 
-
+                                                             if(api.StatusCode == HttpStatusCode.UpgradeRequired)
+                                                             {
+                                                                 Device.BeginInvokeOnMainThread(() => _pageDialogService.DisplayAlertAsync("Atenção", "Atualize seu app para a versão mais recente e tente novamente", "Fechar"));
                                                              }
                                                          }
                                                      });
