@@ -18,8 +18,8 @@
                 <Label FontSize="Large" HorizontalTextAlignment="Center" Text="Funcionalidade ainda não disponível"/>
                 <Label FontSize="Large" HorizontalTextAlignment="Center" Text="Caso precise recuperar sua senha, acesse o site voucherseguro.com"/>
             </StackLayout>
-            <!--<Button Text="Voltar" Command="{Binding GoBackCommand}" />-->
             <Button Text="Acesse o site" Command="{Binding GoToSiteCommand}" Style="{StaticResource buttonPrimary}"/>
+            <Button x:Name="backButton" Text="Voltar" Command="{Binding GoBackCommand}" />
         </StackLayout>
         <localControls:LoadingIndicatorView IsVisible="{Binding IsLoading}" IsLoading="{Binding IsLoading}" LoadingMessage="{Binding LoadingMessage}" />
     </Grid>

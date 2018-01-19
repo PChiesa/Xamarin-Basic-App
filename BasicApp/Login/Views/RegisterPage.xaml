@@ -35,8 +35,8 @@
                         <Entry IsPassword="true" Text="{Binding User.PasswordConfirmation}" />
                     </StackLayout>
                     <Button Text="Registrar" Command="{Binding RegisterCommand}" Style="{StaticResource buttonPrimary}" />
+                    <Button x:Name="backButton" Text="Voltar" Command="{Binding GoBackCommand}" />
                 </StackLayout>
-                <!--<Button Text="Voltar" Command="{Binding GoBackCommand}" />-->
             </StackLayout>
             <localControls:LoadingIndicatorView IsVisible="{Binding IsLoading}" IsLoading="{Binding IsLoading}" LoadingMessage="{Binding LoadingMessage}" />
         </Grid>

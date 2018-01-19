@@ -129,6 +129,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Voucher\Services\VoucherServiceMock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Controls\CarouselViewIndicator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Controls\SquareBoxView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Session\SessionManagerMock.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Login\" />

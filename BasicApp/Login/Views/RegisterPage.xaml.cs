@@ -7,6 +7,7 @@ namespace BasicApp.Login.Views
         public RegisterPage()
         {
             InitializeComponent();
+            backButton.IsVisible = Device.RuntimePlatform == Device.iOS;
         }
     }
 }

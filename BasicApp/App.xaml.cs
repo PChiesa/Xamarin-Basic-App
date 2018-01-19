@@ -37,13 +37,14 @@ namespace BasicApp
             ApplyGlobalStyles();
             ApplyGlobalConverters();
 
+
             try
             {
                 if (Container.Resolve<ISessionManager>().GetUserId() > 0)
                     await NavigationService.NavigateAsync("RootMasterDetail/RootNavigation/EventList");
             }
             catch (EmptySessionException)
-            {
+            {                
                 await NavigationService.NavigateAsync("Login");
             }
             catch (Exception ex)
@@ -61,6 +62,7 @@ namespace BasicApp
             Builder.RegisterTypeForNavigation<RootMasterDetailPage, RootMasterDetailViewModel>("RootMasterDetail");
             Builder.RegisterTypeForNavigation<RootNavigationPage>("RootNavigation");
             Builder.RegisterType<SessionManager>().As<ISessionManager>().SingleInstance();
+
             Builder.RegisterType<UIServices>().As<IUIServices>().SingleInstance();
             Builder.RegisterType<ConnectivityService>().As<IConnectivityService>();
             Builder.RegisterType<TotpCodeService>().As<ITotpCodeService>();
@@ -82,11 +84,11 @@ namespace BasicApp
 
 
 #if __IOS__
-            const string rezRegular = "";
-            const string montSerratLight = "";
-            const string montSerratRegular = "";
-            const string montSerratMedium = "";
-            const string montSerratBold = "";
+            const string rezRegular = "REZ-Regular";
+            const string montSerratLight = "Montserrat-Light";
+            const string montSerratRegular = "Montserrat-Regular";
+            const string montSerratMedium = "Montserrat-Medium";
+            const string montSerratBold = "Montserrat-Bold";
 #endif
 #if __ANDROID__
             const string rezRegular = "Fonts/REZ.ttf#REZ-Regular";
@@ -120,7 +122,8 @@ namespace BasicApp
             var buttonStyle = new Style(typeof(Button))
             {
                 Setters = {
-                    new Setter { Property = Button.FontFamilyProperty, Value = montSerratMedium}
+                    new Setter { Property = Button.FontFamilyProperty, Value = montSerratMedium},
+                    new Setter { Property = Button.TextColorProperty, Value = Color.White }
                 }
             };
 
@@ -135,7 +138,8 @@ namespace BasicApp
             var buttonPrimary = new Style(typeof(Button))
             {
                 Setters = {
-                    new Setter { Property = Button.BackgroundColorProperty, Value = Color.FromHex("79AB4E")}
+                    new Setter { Property = Button.BackgroundColorProperty, Value = Color.FromHex("79AB4E")},
+                    new Setter { Property = Button.TextColorProperty, Value = Color.White }
                 }
             };
 

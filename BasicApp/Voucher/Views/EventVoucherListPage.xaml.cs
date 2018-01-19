@@ -10,7 +10,7 @@ namespace BasicApp.Voucher.Views
     {
         public EventVoucherListPage()
         {
-            InitializeComponent();
+            InitializeComponent();         
         }
     }
 }

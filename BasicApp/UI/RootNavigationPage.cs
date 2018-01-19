@@ -8,7 +8,6 @@ namespace BasicApp.UI
     {
         public RootNavigationPage(Page root) : base(root)
         {
-
         }
     }
 }

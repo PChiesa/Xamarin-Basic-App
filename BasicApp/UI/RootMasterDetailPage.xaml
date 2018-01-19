@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
@@ -10,7 +10,6 @@
             <StackLayout Padding="20">
                 <StackLayout VerticalOptions="Start">
                     <Image Source="logowhite.png" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" WidthRequest="225" />
-
                     <BoxView HorizontalOptions="Fill" Margin="0,10,0,10" HeightRequest="1" BackgroundColor="#94BD4D"/>
                 </StackLayout>
                 <StackLayout>
