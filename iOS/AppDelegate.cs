@@ -21,12 +21,6 @@ namespace BasicApp.iOS
             //			Xamarin.Calabash.Start();
             //#endif
 
-            /* Set NavigationPage Title Color */
-            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes
-            {
-                TextColor = UIColor.White
-            });
-
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

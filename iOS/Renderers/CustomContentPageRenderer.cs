@@ -22,6 +22,7 @@ namespace BasicApp.iOS.Renderers
                 }
 
                 e.NewElement.BackgroundColor = Color.FromHex("333");
+                NavigationPage.SetBackButtonTitle(e.NewElement, "");
             }
 
         }

@@ -17,6 +17,13 @@ namespace BasicApp.iOS.Renderers
 
             this.NavigationBar.TopItem.LeftBarButtonItem.TintColor = UIColor.White;
             this.NavigationBar.TopItem.RightBarButtonItem.TintColor = UIColor.White;
+
+            if (this.NavigationBar.TopItem.RightBarButtonItem.Title == "Recarregar")
+            {
+                this.NavigationBar.TopItem.SetRightBarButtonItem(new UIBarButtonItem(UIBarButtonSystemItem.Refresh), true);
+            }
+
+
         }
 
         protected override void OnElementChanged(VisualElementChangedEventArgs e)
@@ -25,13 +32,7 @@ namespace BasicApp.iOS.Renderers
 
             if (e.NewElement != null)
             {
-                if (NavigationItem?.BackBarButtonItem != null)
-                    NavigationItem.BackBarButtonItem.Title = " ";
-                if (NavigationBar.BackItem != null)
-                {
-                    NavigationBar.BackItem.Title = " ";
-                }
-
+                (e.NewElement as NavigationPage).BarTextColor = Color.White;
             }
         }
     }
