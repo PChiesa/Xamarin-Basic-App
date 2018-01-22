@@ -18,5 +18,21 @@ namespace BasicApp.iOS.Renderers
             this.NavigationBar.TopItem.LeftBarButtonItem.TintColor = UIColor.White;
             this.NavigationBar.TopItem.RightBarButtonItem.TintColor = UIColor.White;
         }
+
+        protected override void OnElementChanged(VisualElementChangedEventArgs e)
+        {
+            base.OnElementChanged(e);
+
+            if (e.NewElement != null)
+            {
+                if (NavigationItem?.BackBarButtonItem != null)
+                    NavigationItem.BackBarButtonItem.Title = " ";
+                if (NavigationBar.BackItem != null)
+                {
+                    NavigationBar.BackItem.Title = " ";
+                }
+
+            }
+        }
     }
 }

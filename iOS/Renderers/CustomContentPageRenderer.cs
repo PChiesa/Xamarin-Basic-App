@@ -1,5 +1,6 @@
 ﻿using System;
 using BasicApp.iOS.Renderers;
+using BasicApp.Login.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -13,18 +14,16 @@ namespace BasicApp.iOS.Renderers
         {
             base.OnElementChanged(e);
 
-            if (e.OldElement != null || Element == null)
+            if (e.NewElement != null)
             {
-                return;
-            }
+                if (e.NewElement is LoginPage || e.NewElement is RecoverPage || e.NewElement is RegisterPage)
+                {
+                    (e.NewElement as Page).Padding = new Thickness(0, 20, 0, 0);
+                }
 
-            try
-            {
                 e.NewElement.BackgroundColor = Color.FromHex("333");
             }
-            catch (Exception)
-            {
-            }
+
         }
     }
 }
